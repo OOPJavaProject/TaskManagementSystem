@@ -7,8 +7,8 @@ import com.company.oop.taskmanagement.models.contracts.Status;
 import java.util.List;
 
 public interface Task {
-    int getId();
 
+    int getId();
     String getTitle();
 
     String getDescription();

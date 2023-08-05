@@ -7,7 +7,7 @@ import com.company.oop.taskmanagement.models.enums.Priority;
 
 import java.util.List;
 
-public interface Bug extends Task {
+public interface Bug extends Task{
     List<String> getSteps();
 
     Priority getPriority();
