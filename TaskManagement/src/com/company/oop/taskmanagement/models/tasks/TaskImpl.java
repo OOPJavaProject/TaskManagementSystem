@@ -94,4 +94,12 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return String.format("""
+                Title: %s
+                Description: %s
+                Status: %s
+                """, title, description, status);
+    }
 }

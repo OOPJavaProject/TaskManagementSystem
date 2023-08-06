@@ -20,4 +20,6 @@ public interface Task {
     void progressStatus();
 
     void revertStatus();
+
+    String toString();
 }

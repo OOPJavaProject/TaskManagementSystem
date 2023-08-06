@@ -61,4 +61,21 @@ public class BugImpl extends TaskImpl implements Bug {
     public void changeStatus(BugStatus status) {
 //TODO MAKE SURE THAT STATUS IS IMPLEMENTED CORRECTLY HERE
     }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                --Bug--
+                %s
+                Steps to reproduce -> %s
+                Priority: %s
+                Severity: %s
+                Assignee: %s
+                Comments:
+                %s
+                History:
+                %s
+                -----------
+                """, super.toString(), getPriority(), getSeverity(), getAssignee(), getComments(), getHistoryChanges());
+    }
 }

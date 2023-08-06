@@ -46,4 +46,19 @@ public class StoryImpl extends TaskImpl implements Story {
     public Member getAssignee() {
         return assignee;
     }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                --Story--
+                %s
+                Priority: %s
+                Size: %s
+                Assignee: %s
+                Comments:
+                %s
+                History:
+                %s
+                """, super.toString(), getPriority(), getSize(), getAssignee(), getComments(), getHistoryChanges());
+    }
 }

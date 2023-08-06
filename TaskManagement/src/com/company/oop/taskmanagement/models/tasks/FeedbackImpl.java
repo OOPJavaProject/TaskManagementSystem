@@ -19,4 +19,17 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     public int getRating() {
         return rating;
     }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                --Feedback--
+                %s
+                Rating: %d
+                Comments:
+                %s
+                History:
+                %s
+                """, super.toString(), getRating(), getComments(), getHistoryChanges());
+    }
 }
