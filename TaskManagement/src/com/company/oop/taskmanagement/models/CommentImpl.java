@@ -33,4 +33,13 @@ public class CommentImpl implements Comment {
     public String getContent() {
         return null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CommentImpl comment)) return false;
+
+        if (!author.equals(comment.author)) return false;
+        return content.equals(comment.content);
+    }
 }

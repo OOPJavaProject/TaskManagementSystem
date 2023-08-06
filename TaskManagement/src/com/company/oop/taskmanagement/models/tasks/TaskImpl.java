@@ -1,7 +1,9 @@
 package com.company.oop.taskmanagement.models.tasks;
 
+import com.company.oop.taskmanagement.models.EventLog;
 import com.company.oop.taskmanagement.models.contracts.ActivityHistory;
 import com.company.oop.taskmanagement.models.contracts.Comment;
+import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.Validation;
 import com.company.oop.taskmanagement.models.contracts.Status;
@@ -24,21 +26,61 @@ public abstract class TaskImpl implements Task {
             String.format("The description must be between %d and %d characters long!",
                     DESCRIPTION_MIN_LENGTH,
                     DESCRIPTION_MAX_LENGTH);
+    private static final String TASK_CREATED_LOG = "%s with title %s has been created.";
+    private static final String COMMENT_ADDED_LOG = "%s added a comment.";
+    private static final String COMMENT_REMOVED_LOG = "%s removed a comment.";
 
     private int id;
     private String title;
     private String description;
+
+    private TaskType taskType;
     private final List<Comment> comments;
     private final List<ActivityHistory> history;
     private Status status;
 
-    public TaskImpl(int id, String title, String description, Status status) {
+    public TaskImpl(int id, String title, String description, Status status, TaskType tasktype) {
         setId(id);
         setTitle(title);
         setDescription(description);
         this.status = status;
         history = new ArrayList<>();
         comments = new ArrayList<>();
+        setTaskType(tasktype);
+
+        logEvent(String.format(TASK_CREATED_LOG, tasktype.toString(), title));
+    }
+    protected void setTaskType(TaskType type){
+     this.taskType = type;
+    }
+
+    //protected, so that subclasses can add history of changes on their progress
+    protected void logEvent(String event) {
+        history.add(new EventLog(event));
+    }
+
+    @Override
+    public void addComment(Comment commentToAdd) {
+        this.comments.add(commentToAdd);
+
+        logEvent(String.format(COMMENT_ADDED_LOG, commentToAdd.getAuthor()));
+    }
+
+    @Override
+    public void removeComment(Comment commentToRemove) {
+        this.comments.remove(commentToRemove);
+
+        logEvent(String.format(COMMENT_REMOVED_LOG, commentToRemove.getAuthor()));
+    }
+
+    @Override
+    public void progressStatus() {
+//TODO
+    }
+
+    @Override
+    public void revertStatus() {
+//TODO
     }
 
     @Override
@@ -55,10 +97,6 @@ public abstract class TaskImpl implements Task {
     public String getDescription() {
         return description;
     }
-    @Override
-    public Status getStatus() {
-        return status;
-    }
 
     @Override
     public List<Comment> getComments() {
@@ -70,25 +108,13 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(history);
     }
 
-    @Override
-    public void addComment(Comment commentToAdd) {
-        comments.add(commentToAdd);
+    public Status getStatus() {
+        return status;
     }
 
-    @Override
-    public void removeComment(Comment commentToRemove) {
-        comments.remove(commentToRemove);
+    protected void setStatus(Status status){
+        this.status = status;
     }
-
-    @Override
-    public String toString() {
-        return String.format("""
-                Title: %s
-                Description: %s
-                Status: %s
-                """, title, description, status);
-    }
-
     private void setId(int id) {
         this.id = id;
     }
@@ -103,7 +129,12 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    protected void setStatus(Status status) {
-        this.status = status;
+    @Override
+    public String toString() {
+        return String.format("""
+                Title: %s
+                Description: %s
+                Status: %s
+                """, title, description, status);
     }
 }

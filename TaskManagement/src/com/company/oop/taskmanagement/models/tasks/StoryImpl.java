@@ -7,17 +7,20 @@ import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.StorySize;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.BugStatus;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.StoryStatus;
+import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Story;
 
 public class StoryImpl extends TaskImpl implements Story {
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Story status is already at %s";
+    private static final String STATUS_CHANGED_LOG =" Status has been changed from %s to %s." ;
+    private static final String STATUS_UNSUCCESSFUL_CHANGE_LOG = "Status change has been unsuccessful, current status is: %s.";
     private Priority priority;
     private StorySize size;
     private Member assignee;
 
     public StoryImpl(int id, String title, String description, Priority priority, StorySize size, Member assignee) {
-        super(id, title, description, StoryStatus.NOT_DONE);
+        super(id, title, description, StoryStatus.NOT_DONE, TaskType.STORY);
         setPriority(priority);
         setSize(size);
         setAssignee(assignee);
@@ -40,22 +43,38 @@ public class StoryImpl extends TaskImpl implements Story {
 
     @Override
     public void progressStatus() {
+        Status tempStatus = getStatus();
         if (getStatus() == StoryStatus.NOT_DONE) {
             setStatus(StoryStatus.IN_PROGRESS);
-        } else if (getStatus() == StoryStatus.IN_PROGRESS) {
+
+            logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
+        }
+        else if (getStatus() == StoryStatus.IN_PROGRESS) {
             setStatus(StoryStatus.DONE);
-        } else {
+
+            logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
+        }
+        else {
+            logEvent(String.format(STATUS_UNSUCCESSFUL_CHANGE_LOG, getStatus()));
             throw new IllegalArgumentException(String.format(STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
         }
     }
 
     @Override
     public void revertStatus() {
+        Status tempStatus = getStatus();
         if (getStatus() == StoryStatus.DONE) {
             setStatus(StoryStatus.IN_PROGRESS);
-        } else if (getStatus() == StoryStatus.IN_PROGRESS) {
+
+            logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
+        }
+        else if (getStatus() == StoryStatus.IN_PROGRESS) {
             setStatus(StoryStatus.NOT_DONE);
-        } else {
+
+            logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
+        }
+        else {
+            logEvent(String.format(STATUS_UNSUCCESSFUL_CHANGE_LOG, getStatus()));
             throw new IllegalArgumentException(String.format(STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
         }
     }
