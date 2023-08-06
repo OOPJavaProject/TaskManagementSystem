@@ -15,6 +15,10 @@ public interface Task {
 
     List<Comment> getComments();
 
+    void addComment(Comment commentToAdd);
+
+    void removeComment(Comment commentToRemove);
+
     List<ActivityHistory> getHistoryChanges();
 
     void progressStatus();

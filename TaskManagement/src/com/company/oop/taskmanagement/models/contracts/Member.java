@@ -8,6 +8,11 @@ public interface Member {
     String getName();
 
     List<Task> getTasks();
+    void removeComment(Comment comment, Task taskToRemoveComment);
+    void addComment(Comment comment, Task taskToAddComment);
+
+    String printTasks();
+    boolean isLoggedIn();
 
     List<ActivityHistory> getActivityHistory(); //TODO
 
