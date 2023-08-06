@@ -42,16 +42,6 @@ public abstract class TaskImpl implements Task {
     }
 
     @Override
-    public void progressStatus() {
-//TODO
-    }
-
-    @Override
-    public void revertStatus() {
-//TODO
-    }
-
-    @Override
     public int getId() {
         return id;
     }
@@ -65,6 +55,10 @@ public abstract class TaskImpl implements Task {
     public String getDescription() {
         return description;
     }
+    @Override
+    public Status getStatus() {
+        return status;
+    }
 
     @Override
     public List<Comment> getComments() {
@@ -76,8 +70,23 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(history);
     }
 
-    public Status getStatus() {
-        return status;
+    @Override
+    public void addComment(Comment commentToAdd) {
+        comments.add(commentToAdd);
+    }
+
+    @Override
+    public void removeComment(Comment commentToRemove) {
+        comments.remove(commentToRemove);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                Title: %s
+                Description: %s
+                Status: %s
+                """, title, description, status);
     }
 
     private void setId(int id) {
@@ -94,12 +103,7 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return String.format("""
-                Title: %s
-                Description: %s
-                Status: %s
-                """, title, description, status);
+    protected void setStatus(Status status) {
+        this.status = status;
     }
 }

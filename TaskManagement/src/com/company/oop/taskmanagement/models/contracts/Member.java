@@ -7,6 +7,10 @@ import java.util.List;
 public interface Member {
     String getName();
 
+    String getUsername();
+
+    String getPassword();
+
     List<Task> getTasks();
     void removeComment(Comment comment, Task taskToRemoveComment);
     void addComment(Comment comment, Task taskToAddComment);
@@ -17,4 +21,6 @@ public interface Member {
     List<ActivityHistory> getActivityHistory(); //TODO
 
     String toString();
+
+    void addMember(Member member);
 }

@@ -1,9 +1,13 @@
 package com.company.oop.taskmanagement.models.tasks;
 
+import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.FeedbackStatus;
 import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
+
+    public static final String STATUS_CHANGE_ERROR_MESSAGE = "Feedback status is already at %s";
+
     private int rating;
 
     public FeedbackImpl(int id , String title, String description, int rating) {
@@ -11,13 +15,35 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
         setRating(rating);
     }
 
-    private void setRating(int rating) {
-        this.rating = rating;
-    }
-
     @Override
     public int getRating() {
         return rating;
+    }
+
+    @Override
+    public void progressStatus() {
+        if (getStatus() == FeedbackStatus.NEW) {
+            setStatus(FeedbackStatus.UNSCHEDULED);
+        } else if (getStatus() == FeedbackStatus.UNSCHEDULED) {
+            setStatus(FeedbackStatus.SCHEDULED);
+        } else if (getStatus() == FeedbackStatus.SCHEDULED) {
+            setStatus(FeedbackStatus.DONE);
+        } else {
+            throw new IllegalArgumentException(String.format(STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
+        }
+    }
+
+    @Override
+    public void revertStatus() {
+        if (getStatus() == FeedbackStatus.DONE) {
+            setStatus(FeedbackStatus.SCHEDULED);
+        } else if (getStatus() == FeedbackStatus.SCHEDULED) {
+            setStatus(FeedbackStatus.UNSCHEDULED);
+        } else if (getStatus() == FeedbackStatus.UNSCHEDULED) {
+            setStatus(FeedbackStatus.NEW);
+        } else {
+            throw new IllegalArgumentException(String.format(STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
+        }
     }
 
     @Override
@@ -31,5 +57,9 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
                 History:
                 %s
                 """, super.toString(), getRating(), getComments(), getHistoryChanges());
+    }
+
+    private void setRating(int rating) {
+        this.rating = rating;
     }
 }

@@ -1,6 +1,7 @@
 package com.company.oop.taskmanagement.core.contracts;
 
 import com.company.oop.taskmanagement.models.contracts.Board;
+import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.contracts.Team;
 import com.company.oop.taskmanagement.models.enums.Priority;
@@ -35,6 +36,8 @@ public interface TaskRepository {
 
     Member findMemberByName(String memberName);
 
+    Member findMemberByUserName(String username);
+
     Task findTaskById(int id);
 
     Bug createBug(String title, String description, Priority priority, Severity severity, Member assignee);
@@ -43,15 +46,21 @@ public interface TaskRepository {
 
     Story createStory(String title, String description, Priority priority, StorySize size, Member assignee);
 
-    Member createMember();
+    Member createMember(String name, String username, String password);
 
-    Board createBoard();
+    Board createBoard(String name);
 
-    Team createTeam();
+    Team createTeam(String name);
 
-    //TODO WE HAVE TO ADD ARGUMENTS WHEN THESE CLASSES ARE IMPLEMENTED
+    boolean hasLoggedInMember();
 
+    void login(Member member);
 
+    void logout();
 
+    Comment createComment(String content, Member author);
 
+    Member getLoggedInMember();
+
+    void addMember(Member memberToAdd);
 }

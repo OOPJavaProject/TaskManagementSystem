@@ -13,6 +13,8 @@ public interface Task {
 
     String getDescription();
 
+    Status getStatus();
+
     List<Comment> getComments();
 
     void addComment(Comment commentToAdd);
@@ -26,4 +28,5 @@ public interface Task {
     void revertStatus();
 
     String toString();
+
 }

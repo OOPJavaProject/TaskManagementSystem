@@ -2,7 +2,12 @@ package com.company.oop.taskmanagement.core;
 
 import com.company.oop.taskmanagement.core.contracts.TaskRepository;
 import com.company.oop.taskmanagement.exceptions.ElementNotFoundException;
+import com.company.oop.taskmanagement.models.BoardImpl;
+import com.company.oop.taskmanagement.models.CommentImpl;
+import com.company.oop.taskmanagement.models.MemberImpl;
+import com.company.oop.taskmanagement.models.TeamImpl;
 import com.company.oop.taskmanagement.models.contracts.Board;
+import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.contracts.Team;
 import com.company.oop.taskmanagement.models.enums.Priority;
@@ -18,6 +23,16 @@ import java.util.List;
 
 public class TaskRepositoryImpl implements TaskRepository {
 
+    public static final String MEMBER_EXISTS_MESSAGE = "Member with name %s already exists.";
+    public static final String TEAM_EXISTS_MESSAGE = "Team with name %s already exists.";
+    public static final String TEAM_NOT_EXIST_MESSAGE = "Team with name %s does not exist!";
+    public static final String BOARD_NOT_EXIST_MESSAGE = "Board with name %s does not exist!";
+    public static final String MEMBER_NOT_EXIST_MESSAGE = "Member with name %s does not exist!";
+
+    public static final String MEMBER_USERNAME_NOT_EXIST_MESSAGE = "Member with username %s does not exist!";
+    public static final String TASK_NOT_EXIST_MESSAGE = "Task with ID%d does not exist!";
+    public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member";
+    public static final String USER_ALREADY_EXISTS = "User with %s name already exist. Choose a different username!";
     private int nextId;
 
     private final List<Team> teams = new ArrayList<>();
@@ -27,6 +42,10 @@ public class TaskRepositoryImpl implements TaskRepository {
     private final List<Task> tasks = new ArrayList<>();
 
     private final List<Board> boards = new ArrayList<>();
+
+    private final List<Comment> comments = new ArrayList<>();
+
+    private Member loggedMember;
 
     public TaskRepositoryImpl() {
         nextId = 0;
@@ -89,7 +108,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                 return team;
             }
         }
-        throw new ElementNotFoundException(String.format("Team with name %s does not exist!", teamName));
+        throw new ElementNotFoundException(String.format(TEAM_NOT_EXIST_MESSAGE, teamName));
     }
 
     @Override
@@ -99,7 +118,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                 return board;
             }
         }
-        throw new ElementNotFoundException(String.format("Board with name %s does not exist!", boardName));
+        throw new ElementNotFoundException(String.format(BOARD_NOT_EXIST_MESSAGE, boardName));
     }
 
     @Override
@@ -109,7 +128,17 @@ public class TaskRepositoryImpl implements TaskRepository {
                 return member;
             }
         }
-        throw new ElementNotFoundException(String.format("Member with name %s does not exist!", memberName));
+        throw new ElementNotFoundException(String.format(MEMBER_NOT_EXIST_MESSAGE, memberName));
+    }
+
+    @Override
+    public Member findMemberByUserName(String username) {
+        for (Member member : members) {
+            if (member.getUsername().equals(username)) {
+                return member;
+            }
+        }
+        throw new ElementNotFoundException(String.format(MEMBER_USERNAME_NOT_EXIST_MESSAGE, username));
     }
 
     @Override
@@ -119,7 +148,7 @@ public class TaskRepositoryImpl implements TaskRepository {
                 return task;
             }
         }
-        throw new ElementNotFoundException(String.format("Task with ID%d does not exist!", id));
+        throw new ElementNotFoundException(String.format(TASK_NOT_EXIST_MESSAGE, id));
     }
 
     @Override
@@ -144,17 +173,69 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Member createMember() {
-        return null;
+    public Member createMember(String name, String username, String password) {
+        if (memberExists(name)) {
+            throw new IllegalArgumentException(String.format(MEMBER_EXISTS_MESSAGE, name));
+        } else {
+            Member member = new MemberImpl(name,username, password);
+            this.members.add(member);
+            return member;
+        }
     }
 
     @Override
-    public Board createBoard() {
-        return null;
+    public Board createBoard(String name) {
+        Board board = new BoardImpl(name);
+        this.boards.add(board);
+        return board;
     }
 
     @Override
-    public Team createTeam() {
-        return null;
+    public Team createTeam(String name) {
+        if (teamExists(name)) {
+            throw new IllegalArgumentException(String.format(TEAM_EXISTS_MESSAGE, name));
+        } else {
+            Team team = new TeamImpl(name);
+            this.teams.add(team);
+            return team;
+        }
     }
-}
+
+    @Override
+    public Comment createComment(String content, Member author) {
+        Comment comment = new CommentImpl(content, author);
+        this.comments.add(comment);
+        return comment;
+    }
+
+    @Override
+        public Member getLoggedInMember() {
+            if (loggedMember == null) {
+                throw new IllegalArgumentException(NO_LOGGED_IN_MEMBER);
+            }
+            return loggedMember;
+        }
+
+    @Override
+        public boolean hasLoggedInMember() {
+            return loggedMember != null;
+        }
+
+        @Override
+        public void login(Member member) {
+            loggedMember = member;
+        }
+
+        @Override
+        public void logout() {
+            loggedMember = null;
+        }
+
+        @Override
+        public void addMember(Member memberToAdd) {
+            if (members.contains(memberToAdd)) {
+                throw new IllegalArgumentException(String.format(USER_ALREADY_EXISTS, memberToAdd.getName()));
+            }
+            this.members.add(memberToAdd);
+        }
+    }

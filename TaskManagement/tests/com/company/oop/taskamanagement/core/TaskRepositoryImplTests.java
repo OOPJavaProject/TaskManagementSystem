@@ -100,6 +100,21 @@ public class TaskRepositoryImplTests {
     }
 
     @Test
+    public void createBoard_Should_AddToBoards_When_ArgumentsAreValid() {
+
+    }
+
+    @Test
+    public void createTeam_Should_AddToTeams_When_ArgumentsAreValid() {
+
+    }
+
+    @Test
+    public void createMember_Should_AddToMembers_When_ArgumentsAreValid() {
+
+    }
+
+    @Test
     public void findBoardByName_Should_ReturnBoard_When_BoardExists() {
 
     }

@@ -29,7 +29,7 @@ public class TeamImpl implements Team {
     private static final String BOARD_REMOVED_LOG = "Board with name %s has been removed.";
     private static final String MEMBER_ADDED_LOG = "Member with name %s has been added.";
     private static final String MEMBER_REMOVED_LOG = "Member with name %s has been removed.";
-
+    public static final String BOARD_EXISTS_MESSAGE = "Board with name %s already exists in this team.";
 
     private String teamName;
     private final List<Member> members = new ArrayList<>();
@@ -70,6 +70,9 @@ public class TeamImpl implements Team {
     }
 
     public void addBoard(Board board) {
+        if (boards.contains(board)) {
+            throw new IllegalArgumentException(String.format(BOARD_EXISTS_MESSAGE, board.getName()));
+        }
         this.boards.add(board);
         logEvent(String.format(BOARD_ADDED_LOG, board.getName()));
     }
