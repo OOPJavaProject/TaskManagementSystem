@@ -1,5 +1,6 @@
 package com.company.oop.taskamanagement.models.tasks;
 
+import com.company.oop.taskamanagement.utils.TaskImplConstants;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.Severity;
@@ -83,5 +84,15 @@ public class BugImplTests {
     @Test
     public void changeStatus_Should_changeCurrentStatus_When_ValidArguments() {
 
+    }
+
+    public static BugImpl initializeTestBug() {
+        return new BugImpl(
+                TaskImplConstants.VALID_ID,
+                TaskImplConstants.VALID_TITLE,
+                TaskImplConstants.VALID_DESCRIPTION,
+                TaskImplConstants.VALID_PRIORITY,
+                TaskImplConstants.VALID_SEVERITY,
+                TaskImplConstants.VALID_ASSIGNEE);
     }
 }

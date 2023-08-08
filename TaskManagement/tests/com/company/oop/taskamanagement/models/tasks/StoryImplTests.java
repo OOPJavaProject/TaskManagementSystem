@@ -1,5 +1,8 @@
 package com.company.oop.taskamanagement.models.tasks;
 
+import com.company.oop.taskamanagement.utils.TaskImplConstants;
+import com.company.oop.taskmanagement.models.tasks.BugImpl;
+import com.company.oop.taskmanagement.models.tasks.StoryImpl;
 import org.junit.jupiter.api.Test;
 
 public class StoryImplTests {
@@ -43,5 +46,15 @@ public class StoryImplTests {
     @Test
     public void constructor_Should_ThrowException_When_MemberDoesNotExistInTeam() {
 
+    }
+
+    public static StoryImpl initializeTestStory() {
+        return new StoryImpl(
+                TaskImplConstants.VALID_ID,
+                TaskImplConstants.VALID_TITLE,
+                TaskImplConstants.VALID_DESCRIPTION,
+                TaskImplConstants.VALID_PRIORITY,
+                TaskImplConstants.VALID_STORYSIZE,
+                TaskImplConstants.VALID_ASSIGNEE);
     }
 }

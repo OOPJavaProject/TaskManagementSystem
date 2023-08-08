@@ -30,12 +30,12 @@ public class MemberImpl implements Member {
             NAME_LEN_MIN,
             NAME_LEN_MAX);
 
-    public static final int PASSWORD_LEN_MIN = -1;
-    public static final int PASSWORD_LEN_MAX = -1;
+    public static final int PASSWORD_LEN_MIN = 5;
+    public static final int PASSWORD_LEN_MAX = 15;
     private static final String PASSWORD_REGEX_PATTERN = "^[A-Za-z0-9@*_-]+$";
     private static final String PASSWORD_PATTERN_ERR = "Password contains invalid symbols!";
     private static final String PASSWORD_LEN_ERR = format(
-            "Password must be between %s and %s characters long!",
+            "Password must be between %d and %d characters long!",
             PASSWORD_LEN_MIN,
             PASSWORD_LEN_MAX);
 
@@ -64,6 +64,10 @@ public class MemberImpl implements Member {
             %s
             ----------
             """;
+    public static final String TASK_ADDED_MSG = "Task was successfully added to the member's tasklist.";
+    public static final String TASK_REMOVED_MSG = "Task was successfully removed from the member's tasklist";
+    public static final String TASK_NOT_IN_THE_LIST_MSG = "The task you want to remove does not exist in the list.";
+    public static final String FAILED_TO_REMOVE_TASK = "Failed to remove task due to non - existence.";
     private String name;
     private String username;
     private String password;
@@ -85,7 +89,7 @@ public class MemberImpl implements Member {
 
     @Override
     public String getName() {
-        return this.name;
+        return name;
     }
 
     @Override
@@ -100,6 +104,23 @@ public class MemberImpl implements Member {
     @Override
     public List<Task> getTasks() {
         return new ArrayList<>(this.tasks);
+    }
+
+    @Override
+    public void addTask(Task task) {
+        tasks.add(task);
+        logEvent(TASK_ADDED_MSG);
+    }
+
+    @Override
+    public void removeTask(Task task) {
+        if (tasks.contains(task)) {
+            tasks.remove(task);
+            logEvent(TASK_REMOVED_MSG);
+        } else {
+            logEvent(FAILED_TO_REMOVE_TASK);
+            throw new IllegalArgumentException(TASK_NOT_IN_THE_LIST_MSG);
+        }
     }
 
     @Override
@@ -183,7 +204,7 @@ public class MemberImpl implements Member {
 
     @Override
     public void addMember(Member member) {
-
+        //TODO ?
     }
 
     private void setPassword(String password) {
@@ -194,7 +215,7 @@ public class MemberImpl implements Member {
 
     private void setName(String name) {
         Validation.validateStringRange(name, NAME_LEN_MIN, NAME_LEN_MAX, NAME_LEN_ERR);
-        this.username = name;
+        this.name = name;
     }
 
     public void setUsername(String username) {

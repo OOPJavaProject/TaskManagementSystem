@@ -32,7 +32,6 @@ public class RegisterMemberCommand extends BaseCommand{
 
     private String registerUser(String name, String username, String password) {
         Member member = getTaskRepository().createMember(name, username, password);
-        getTaskRepository().addMember(member);
         getTaskRepository().login(member);
 
         return String.format(MEMBER_REGISTERED, username);

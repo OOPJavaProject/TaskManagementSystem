@@ -32,7 +32,6 @@ public class TaskRepositoryImpl implements TaskRepository {
     public static final String MEMBER_USERNAME_NOT_EXIST_MESSAGE = "Member with username %s does not exist!";
     public static final String TASK_NOT_EXIST_MESSAGE = "Task with ID%d does not exist!";
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member";
-    public static final String USER_ALREADY_EXISTS = "User with %s name already exist. Choose a different username!";
     private int nextId;
 
     private final List<Team> teams = new ArrayList<>();
@@ -229,13 +228,5 @@ public class TaskRepositoryImpl implements TaskRepository {
         @Override
         public void logout() {
             loggedMember = null;
-        }
-
-        @Override
-        public void addMember(Member memberToAdd) {
-            if (members.contains(memberToAdd)) {
-                throw new IllegalArgumentException(String.format(USER_ALREADY_EXISTS, memberToAdd.getName()));
-            }
-            this.members.add(memberToAdd);
         }
     }

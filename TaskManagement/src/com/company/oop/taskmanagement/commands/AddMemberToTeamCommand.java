@@ -9,7 +9,7 @@ import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
 
-public class AddMemberToTeamCommand extends BaseCommand{
+//public class AddMemberToTeamCommand extends BaseCommand{
 
 //    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 //    public static final String INVALID_PRICE = "Invalid value for price. Should be a number.";
@@ -48,4 +48,4 @@ public class AddMemberToTeamCommand extends BaseCommand{
 //    protected boolean requiresLogin() {
 //        return true;
 //    } //TODO NOT SURE HOW TO DO THIS
-}
+//}

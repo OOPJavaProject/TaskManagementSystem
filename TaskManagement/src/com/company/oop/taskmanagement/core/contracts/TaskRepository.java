@@ -61,6 +61,4 @@ public interface TaskRepository {
     Comment createComment(String content, Member author);
 
     Member getLoggedInMember();
-
-    void addMember(Member memberToAdd);
 }
