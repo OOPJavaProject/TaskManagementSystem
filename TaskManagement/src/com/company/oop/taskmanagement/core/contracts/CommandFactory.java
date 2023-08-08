@@ -4,6 +4,6 @@ import com.company.oop.taskmanagement.commands.contracts.Command;
 
 public interface CommandFactory {
 
-        Command createCommandFromCommandName(String commandTypeAsString, TaskRepository taskRepository);
+        Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository);
 
 }

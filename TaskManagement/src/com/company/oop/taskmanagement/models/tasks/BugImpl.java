@@ -34,10 +34,6 @@ public class BugImpl extends TaskImpl implements Bug {
         setTaskType();
     }
 
-    private void setTaskType(){
-        super.setTaskType(TaskType.BUG);
-    }
-
     @Override
     public List<String> getSteps() {
         return new ArrayList<>(steps);
@@ -118,7 +114,10 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     private void setAssignee(Member assignee) {
-        //TODO - check whether the member is from the team
         this.assignee = assignee;
+    }
+
+    private void setTaskType(){
+        super.setTaskType(TaskType.BUG);
     }
 }

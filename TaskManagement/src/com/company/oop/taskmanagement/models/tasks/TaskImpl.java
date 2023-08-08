@@ -50,9 +50,7 @@ public abstract class TaskImpl implements Task {
 
         logEvent(String.format(TASK_CREATED_LOG, tasktype.toString(), title));
     }
-    protected void setTaskType(TaskType type){
-     this.taskType = type;
-    }
+
 
     //protected, so that subclasses can add history of changes on their progress
     protected void logEvent(String event) {
@@ -71,16 +69,6 @@ public abstract class TaskImpl implements Task {
         this.comments.remove(commentToRemove);
 
         logEvent(String.format(COMMENT_REMOVED_LOG, commentToRemove.getAuthor()));
-    }
-
-    @Override
-    public void progressStatus() {
-//TODO
-    }
-
-    @Override
-    public void revertStatus() {
-//TODO
     }
 
     @Override
@@ -108,6 +96,7 @@ public abstract class TaskImpl implements Task {
         return new ArrayList<>(history);
     }
 
+    @Override
     public Status getStatus() {
         return status;
     }
@@ -127,6 +116,10 @@ public abstract class TaskImpl implements Task {
     private void setDescription(String description) {
         Validation.validateIntRange(description.length(), DESCRIPTION_MIN_LENGTH, DESCRIPTION_MAX_LENGTH, DESCRIPTION_ERROR_MESSAGE);
         this.description = description;
+    }
+
+    protected void setTaskType(TaskType type){
+        this.taskType = type;
     }
 
     @Override

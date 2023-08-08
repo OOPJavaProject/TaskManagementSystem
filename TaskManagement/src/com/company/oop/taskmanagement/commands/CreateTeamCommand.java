@@ -1,8 +1,7 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Team;
-import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
@@ -13,8 +12,8 @@ public class CreateTeamCommand extends BaseCommand{
     public static final String TEAM_CREATED = "Team with name %s was created!";
     private String teamName;
 
-    public CreateTeamCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public CreateTeamCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

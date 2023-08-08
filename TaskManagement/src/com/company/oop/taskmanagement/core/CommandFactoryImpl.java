@@ -4,29 +4,27 @@ import com.company.oop.taskmanagement.commands.*;
 import com.company.oop.taskmanagement.commands.contracts.Command;
 import com.company.oop.taskmanagement.commands.enums.CommandType;
 import com.company.oop.taskmanagement.core.contracts.CommandFactory;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
-
-import javax.swing.event.ChangeEvent;
 
 public class CommandFactoryImpl implements CommandFactory {
 
     @Override
-    public Command createCommandFromCommandName(String commandTypeAsString, TaskRepository taskRepository) {
+    public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
             switch (commandType) {
                 case REGISTERMEMBER:
-                    return new RegisterMemberCommand(taskRepository);
+                    return new RegisterMemberCommand(taskManagementRepository);
                 case LOGIN:
-                    return new LoginCommand(taskRepository);
+                    return new LoginCommand(taskManagementRepository);
                 case LOGOUT:
-                    return new LogoutCommand(taskRepository);
+                    return new LogoutCommand(taskManagementRepository);
 //                case SHOWMEMBERS:
 //                    return new ShowMembersCommand(taskRepository);
 //                case SHOWMEMBERACTIVITY:
 //                    return new ShowMemberActivityCommand(taskRepository);
                 case CREATETEAM:
-                    return new CreateTeamCommand(taskRepository);
+                    return new CreateTeamCommand(taskManagementRepository);
 //                case SHOWTEAMS:
 //                    return new ShowTeamsCommand(taskRepository);
 //                case SHOWTEAMACTIVITY:
@@ -42,11 +40,11 @@ public class CommandFactoryImpl implements CommandFactory {
 //                case SHOWBOARDACTIVITY:
 //                    return new ShowBoardActivityCommand(taskRepository);
                 case CREATEBUG:
-                    return new CreateBugCommand(taskRepository);
+                    return new CreateBugCommand(taskManagementRepository);
                 case CREATEFEEDBACK:
-                    return new CreateFeedbackCommand(taskRepository);
+                    return new CreateFeedbackCommand(taskManagementRepository);
                 case CREATESTORY:
-                    return new CreateStoryCommand(taskRepository);
+                    return new CreateStoryCommand(taskManagementRepository);
 //                case CHANGEPRIORITY:
 //                    return new ChangePriorityCommand(taskRepository);
 //                case CHANGESEVERITY:
@@ -62,7 +60,7 @@ public class CommandFactoryImpl implements CommandFactory {
 //                case UNASSIGN:
 //                    return new UnassignCommand(taskRepository);
                 case ADDCOMMENT:
-                    return new AddCommentCommand(taskRepository);
+                    return new AddCommentCommand(taskManagementRepository);
                 default:
                     throw new IllegalArgumentException();
             }
