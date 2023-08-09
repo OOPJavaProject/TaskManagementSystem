@@ -3,6 +3,7 @@ package com.company.oop.taskmanagement.models.tasks;
 import com.company.oop.taskmanagement.models.EventLog;
 import com.company.oop.taskmanagement.models.contracts.ActivityHistory;
 import com.company.oop.taskmanagement.models.contracts.Comment;
+import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.Validation;
@@ -44,8 +45,8 @@ public abstract class TaskImpl implements Task {
         setTitle(title);
         setDescription(description);
         this.status = status;
-        history = new ArrayList<>();
-        comments = new ArrayList<>();
+        this.history = new ArrayList<>();
+        this.comments = new ArrayList<>();
         setTaskType(tasktype);
 
         logEvent(String.format(TASK_CREATED_LOG, tasktype.toString(), title));
@@ -110,6 +111,11 @@ public abstract class TaskImpl implements Task {
 
     public Status getStatus() {
         return status;
+    }
+
+    public TaskType getTaskType(){
+        //TODO should it be removed? replacement with substring.
+        return this.taskType;
     }
 
     protected void setStatus(Status status){

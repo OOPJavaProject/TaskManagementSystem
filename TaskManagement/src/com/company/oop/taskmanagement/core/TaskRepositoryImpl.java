@@ -32,6 +32,9 @@ public class TaskRepositoryImpl implements TaskRepository {
     public static final String MEMBER_USERNAME_NOT_EXIST_MESSAGE = "Member with username %s does not exist!";
     public static final String TASK_NOT_EXIST_MESSAGE = "Task with ID%d does not exist!";
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member";
+    public static final String MEMBER_ALREADY_PRESENT = "Member %s is already present in team %s";
+
+
     private int nextId;
 
     private final List<Team> teams = new ArrayList<>();
@@ -80,6 +83,7 @@ public class TaskRepositoryImpl implements TaskRepository {
         return false;
     }
 
+
     @Override
     public boolean boardExists(String boardName) {
         for (Board board : boards) {
@@ -91,14 +95,31 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public boolean memberExists(String memberName) {
+    public boolean memberExists(String memberUsername) {
         for (Member member : members) {
-            if (member.getName().equals(memberName)) {
+            if (member.getUsername().equals(memberUsername)) {
                 return true;
             }
         }
         return false;
     }
+
+    @Override
+    public void addMember(Member member) {
+        this.members.add(member);
+    }
+
+    @Override
+    public void addMemberToTeam(String memberUsername, String teamName) {
+        Team team = findTeamByName(teamName);
+        Member member = findMemberByUserName(memberUsername);
+        if (teams.contains(member))
+            throw new IllegalArgumentException(String.format(MEMBER_ALREADY_PRESENT, memberUsername, teamName));
+        for (Team t : getTeams()) {
+            if(t.equals(team)) t.addMember(member);
+        }
+    }
+
 
     @Override
     public Team findTeamByName(String teamName) {
@@ -176,7 +197,7 @@ public class TaskRepositoryImpl implements TaskRepository {
         if (memberExists(name)) {
             throw new IllegalArgumentException(String.format(MEMBER_EXISTS_MESSAGE, name));
         } else {
-            Member member = new MemberImpl(name,username, password);
+            Member member = new MemberImpl(name, username, password);
             this.members.add(member);
             return member;
         }
@@ -208,25 +229,30 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-        public Member getLoggedInMember() {
-            if (loggedMember == null) {
-                throw new IllegalArgumentException(NO_LOGGED_IN_MEMBER);
-            }
-            return loggedMember;
-        }
+    public void assignTaskToMember(Member member, Task task) {
+        member.addTask(task);
+    }
 
     @Override
-        public boolean hasLoggedInMember() {
-            return loggedMember != null;
+    public Member getLoggedInMember() {
+        if (loggedMember == null) {
+            throw new IllegalArgumentException(NO_LOGGED_IN_MEMBER);
         }
-
-        @Override
-        public void login(Member member) {
-            loggedMember = member;
-        }
-
-        @Override
-        public void logout() {
-            loggedMember = null;
-        }
+        return loggedMember;
     }
+
+    @Override
+    public boolean hasLoggedInMember() {
+        return loggedMember != null;
+    }
+
+    @Override
+    public void login(Member member) {
+        loggedMember = member;
+    }
+
+    @Override
+    public void logout() {
+        loggedMember = null;
+    }
+}

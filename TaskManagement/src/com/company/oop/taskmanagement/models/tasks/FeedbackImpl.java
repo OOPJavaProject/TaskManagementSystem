@@ -23,6 +23,11 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     }
 
     @Override
+    public void changeRating(int rating) {
+        setRating(rating);
+    }
+
+    @Override
     public void progressStatus() {
         if (getStatus() == FeedbackStatus.NEW) {
             setStatus(FeedbackStatus.UNSCHEDULED);
@@ -64,6 +69,8 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private void setTaskType(){
         super.setTaskType(TaskType.FEEDBACK);
     }
+
+    //TODO Possible validations for rating (1-5 or 1-10 or 1-100) and -1 case
     private void setRating(int rating) {
         this.rating = rating;
     }

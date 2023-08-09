@@ -17,5 +17,5 @@ public interface Member {
     boolean isLoggedIn();
     List<ActivityHistory> getActivityHistory(); //TODO
     String toString();
-    void addMember(Member member);
+
 }

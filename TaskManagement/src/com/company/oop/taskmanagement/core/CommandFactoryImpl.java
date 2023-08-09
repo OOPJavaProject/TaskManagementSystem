@@ -31,8 +31,8 @@ public class CommandFactoryImpl implements CommandFactory {
 //                    return new ShowTeamsCommand(taskRepository);
 //                case SHOWTEAMACTIVITY:
 //                    return new ShowTeamActivityCommand(taskRepository);
-//                case ADDMEMBERTOTEAM:
-//                    return new AddMemberToTeamCommand(taskRepository);
+               case ADDMEMBERTOTEAM:
+                    return new AddMemberToTeamCommand(taskRepository);
 //                case SHOWALLTEAMMEMBERS:
 //                    return new ShowAllTeamMembersCommand(taskRepository);
 //                case CREATEBOARD:
@@ -47,8 +47,8 @@ public class CommandFactoryImpl implements CommandFactory {
                     return new CreateFeedbackCommand(taskRepository);
                 case CREATESTORY:
                     return new CreateStoryCommand(taskRepository);
-//                case CHANGEPRIORITY:
-//                    return new ChangePriorityCommand(taskRepository);
+                case CHANGEPRIORITY:
+                    return new ChangePriorityCommand(taskRepository);
 //                case CHANGESEVERITY:
 //                    return new ChangeSeverityCommand(taskRepository);
 //                case CHANGESTATUS:

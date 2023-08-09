@@ -53,6 +53,10 @@ public interface TaskRepository {
     Team createTeam(String name);
 
     boolean hasLoggedInMember();
+    void addMemberToTeam(String memberUsername, String teamName);
+    void addMember(Member member);
+
+    void assignTaskToMember(Member member, Task task);
 
     void login(Member member);
 

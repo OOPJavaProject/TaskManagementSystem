@@ -8,9 +8,10 @@ import com.company.oop.taskmanagement.models.enums.StorySize;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.BugStatus;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.StoryStatus;
 import com.company.oop.taskmanagement.models.enums.TaskType;
+import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
 import com.company.oop.taskmanagement.models.tasks.contracts.Story;
 
-public class StoryImpl extends TaskImpl implements Story {
+public class StoryImpl extends AbstractPrioritable implements Story {
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Story status is already at %s";
     private static final String STATUS_CHANGED_LOG =" Status has been changed from %s to %s." ;
@@ -20,10 +21,8 @@ public class StoryImpl extends TaskImpl implements Story {
     private Member assignee;
 
     public StoryImpl(int id, String title, String description, Priority priority, StorySize size, Member assignee) {
-        super(id, title, description, StoryStatus.NOT_DONE, TaskType.STORY);
-        setPriority(priority);
+        super(id, title, description, StoryStatus.NOT_DONE, TaskType.STORY, priority, assignee);
         setSize(size);
-        setAssignee(assignee);
     }
 
     @Override
@@ -94,9 +93,8 @@ public class StoryImpl extends TaskImpl implements Story {
                 """, super.toString(), getPriority(), getSize(), getAssignee(), getComments(), getHistoryChanges());
     }
 
-    private void setPriority(Priority priority) {
-        this.priority = priority;
-    }
+
+
 
     private void setSize(StorySize size) {
         this.size = size;

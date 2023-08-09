@@ -14,22 +14,19 @@ import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BugImpl extends TaskImpl implements Bug {
+public class BugImpl extends AbstractPrioritable implements Bug {
+    //
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Bug status is already at %s";
 
     private static final String STATUS_CHANGED_LOG =" Status has been changed from %s to %s." ;
     private static final String STATUS_UNSUCCESSFUL_CHANGE_LOG = "Status change has been unsuccessful, current status is: %s.";
     private final List<String> steps;
-    private Priority priority;
     private Severity severity;
-    private Member assignee;
 
     public BugImpl(int id, String title, String description, Priority priority, Severity severity, Member assignee) {
-        super(id, title, description, BugStatus.ACTIVE, TaskType.BUG);
-        setPriority(priority);
+        super(id, title, description, BugStatus.ACTIVE, TaskType.BUG, priority, assignee);
         setSeverity(severity);
-        setAssignee(assignee);
         steps = new ArrayList<>();
         setTaskType();
     }
@@ -39,30 +36,14 @@ public class BugImpl extends TaskImpl implements Bug {
     }
 
     @Override
+
     public List<String> getSteps() {
         return new ArrayList<>(steps);
     }
-
-    @Override
-    public Priority getPriority() {
-        return priority;
-    }
-
     @Override
     public Severity getSeverity() {
         return severity;
     }
-
-    @Override
-    public Member getAssignee() {
-        return assignee;
-    }
-
-    public void changeStatus(BugStatus status) {
-        setStatus(status);
-        //TODO We may not need this one
-    }
-
     @Override
     public void progressStatus() {
         Status tempStatus = getStatus();
@@ -78,6 +59,9 @@ public class BugImpl extends TaskImpl implements Bug {
 
     }
 
+    public void addStep(String step){
+        this.steps.add(step);
+    }
     @Override
     public void revertStatus() {
         Status tempStatus = getStatus();
@@ -108,17 +92,7 @@ public class BugImpl extends TaskImpl implements Bug {
                 -----------
                 """, super.toString(), getPriority(), getSeverity(), getAssignee(), getComments(), getHistoryChanges());
     }
-
-    private void setPriority(Priority priority) {
-        this.priority = priority;
-    }
-
     private void setSeverity(Severity severity) {
         this.severity = severity;
-    }
-
-    private void setAssignee(Member assignee) {
-        //TODO - check whether the member is from the team
-        this.assignee = assignee;
     }
 }

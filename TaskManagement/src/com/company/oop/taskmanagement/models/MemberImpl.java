@@ -14,6 +14,7 @@ import static java.lang.String.format;
 
 public class MemberImpl implements Member {
 
+    //TODO boolean isPartOfTeam;
     public static final int USERNAME_LEN_MIN = 5;
 
     public static final int USERNAME_LEN_MAX = 20;
@@ -172,6 +173,19 @@ public class MemberImpl implements Member {
         return historyLogString.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MemberImpl member)) return false;
+
+        return username.equals(member.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return username.hashCode();
+    }
+
     public void logIn(){
         if (this.isLoggedIn){
             throw new IllegalArgumentException(MEMBER_ALREADY_LOGGED_IN);
@@ -200,11 +214,6 @@ public class MemberImpl implements Member {
         memberString.append(String.format(TASK_PRINTING_TEMPLATE, printTasks()));
         memberString.append(String.format(HISTORY_PRINTING_TEMPLATE, printHistory()));
          return memberString.toString();
-    }
-
-    @Override
-    public void addMember(Member member) {
-        //TODO ?
     }
 
     private void setPassword(String password) {

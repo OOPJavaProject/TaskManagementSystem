@@ -2,7 +2,7 @@ package com.company.oop.taskmanagement.utilities;
 
 public class ParsingHelpers {
 
-    public static final String NO_SUCH_ENUM = "There is no %s in %ss.";
+    public static final String NO_SUCH_ENUM = "There is no %s in %s.";
 
     public static double tryParseDouble(String valueToParse, String errorMessage) {
         try {
