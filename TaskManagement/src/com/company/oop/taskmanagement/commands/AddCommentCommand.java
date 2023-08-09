@@ -1,11 +1,8 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.contracts.Member;
-import com.company.oop.taskmanagement.models.enums.Priority;
-import com.company.oop.taskmanagement.models.enums.Severity;
-import com.company.oop.taskmanagement.models.tasks.contracts.Bug;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
@@ -19,8 +16,8 @@ public class AddCommentCommand extends BaseCommand {
     public final static String COMMENT_ADDED_SUCCESSFULLY = "%s added comment successfully!";
     public final static String TASK_DOES_NOT_EXIST = "The task does not exist!";
 
-    public AddCommentCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public AddCommentCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

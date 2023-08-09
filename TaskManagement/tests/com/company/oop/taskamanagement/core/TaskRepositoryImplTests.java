@@ -1,17 +1,17 @@
 package com.company.oop.taskamanagement.core;
 
-import com.company.oop.taskmanagement.core.TaskRepositoryImpl;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TaskRepositoryImplTests {
 
-    private TaskRepository repository;
+    private TaskManagementRepository repository;
 
     @BeforeEach
     public void create_Repository_BeforeEach() {
-        repository = new TaskRepositoryImpl();
+        repository = new TaskManagementRepositoryImpl();
     }
 
     @Test

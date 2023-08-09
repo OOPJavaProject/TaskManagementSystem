@@ -1,8 +1,7 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
-import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public class RegisterMemberCommand extends BaseCommand{
     private final static String MEMBER_ALREADY_EXIST = "Member %s already exist. Choose a different username!";
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 
-    public RegisterMemberCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public RegisterMemberCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

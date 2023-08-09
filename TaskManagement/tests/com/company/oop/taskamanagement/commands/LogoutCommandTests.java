@@ -1,9 +1,8 @@
 package com.company.oop.taskamanagement.commands;
 
 import com.company.oop.taskmanagement.commands.LogoutCommand;
-import com.company.oop.taskmanagement.core.TaskRepositoryImpl;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
-import com.company.oop.taskmanagement.models.MemberImpl;
+import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,12 +12,12 @@ import java.util.ArrayList;
 
 public class LogoutCommandTests {
 
-    private TaskRepository repository;
+    private TaskManagementRepository repository;
     private LogoutCommand logoutCommand;
 
     @BeforeEach
     public void before() {
-        repository = new TaskRepositoryImpl();
+        repository = new TaskManagementRepositoryImpl();
         logoutCommand = new LogoutCommand(repository);
     }
 

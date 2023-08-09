@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.utilities.Validation;
 
@@ -13,8 +13,8 @@ public class LoginCommand extends BaseCommand{
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
-    public LoginCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public LoginCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

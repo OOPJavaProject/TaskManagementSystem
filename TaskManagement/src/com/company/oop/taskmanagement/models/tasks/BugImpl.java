@@ -22,21 +22,17 @@ public class BugImpl extends AbstractPrioritable implements Bug {
     private static final String STATUS_CHANGED_LOG =" Status has been changed from %s to %s." ;
     private static final String STATUS_UNSUCCESSFUL_CHANGE_LOG = "Status change has been unsuccessful, current status is: %s.";
     private final List<String> steps;
+    private Priority priority;
     private Severity severity;
+    private Member assignee;
 
     public BugImpl(int id, String title, String description, Priority priority, Severity severity, Member assignee) {
         super(id, title, description, BugStatus.ACTIVE, TaskType.BUG, priority, assignee);
         setSeverity(severity);
         steps = new ArrayList<>();
-        setTaskType();
-    }
-
-    private void setTaskType(){
-        super.setTaskType(TaskType.BUG);
     }
 
     @Override
-
     public List<String> getSteps() {
         return new ArrayList<>(steps);
     }

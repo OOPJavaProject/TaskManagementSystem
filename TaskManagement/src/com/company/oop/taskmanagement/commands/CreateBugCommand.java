@@ -1,12 +1,10 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.Severity;
-import com.company.oop.taskmanagement.models.enums.StorySize;
 import com.company.oop.taskmanagement.models.tasks.contracts.Bug;
-import com.company.oop.taskmanagement.models.tasks.contracts.Story;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
 
@@ -18,8 +16,8 @@ public class CreateBugCommand extends BaseCommand{
     public static final String BUG_CREATED = "Bug with title %s was created!";
 
 
-    public CreateBugCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public CreateBugCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override
@@ -34,7 +32,7 @@ public class CreateBugCommand extends BaseCommand{
 
         Bug createdBug = getTaskRepository().createBug(title, description, priority, severity, assignee);
 
-        return String.format(BUG_CREATED, title);
+        return String.format(BUG_CREATED, createdBug.getTitle());
     }
 
     @Override

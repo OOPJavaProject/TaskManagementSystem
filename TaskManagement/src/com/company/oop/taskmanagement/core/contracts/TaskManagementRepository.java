@@ -14,7 +14,7 @@ import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 
 import java.util.List;
 
-public interface TaskRepository {
+public interface TaskManagementRepository {
 
     List<Task> getTasks();
 

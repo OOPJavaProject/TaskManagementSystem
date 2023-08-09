@@ -4,11 +4,10 @@ import com.company.oop.taskamanagement.models.tasks.BugImplTests;
 import com.company.oop.taskamanagement.utils.TestUtilities;
 import com.company.oop.taskmanagement.commands.AddCommentCommand;
 import com.company.oop.taskmanagement.commands.contracts.Command;
-import com.company.oop.taskmanagement.core.TaskRepositoryImpl;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.contracts.Member;
-import com.company.oop.taskmanagement.models.tasks.BugImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,13 +18,13 @@ public class AddCommentCommandTests {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
 
-    private TaskRepository repository;
+    private TaskManagementRepository repository;
     private Command addCommentsCommand;
     private Member member;
 
     @BeforeEach
     public void before() {
-        repository = new TaskRepositoryImpl();
+        repository = new TaskManagementRepositoryImpl();
         addCommentsCommand = new AddCommentCommand(repository);
         member = LoginCommandTests.loginInitializedUserToRepository(repository);
     }
@@ -52,7 +51,7 @@ public class AddCommentCommandTests {
     }
 
     @Test
-    public void should_ThrowException_When_VehicleDoesNotExist() {
+    public void should_ThrowException_When_TaskDoesNotExist() {
         // Arrange
         List<String> params = List.of(
                 CommentImplTests.VALID_CONTENT,

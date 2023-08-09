@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagement.core;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.exceptions.ElementNotFoundException;
 import com.company.oop.taskmanagement.models.BoardImpl;
 import com.company.oop.taskmanagement.models.CommentImpl;
@@ -21,7 +21,7 @@ import com.company.oop.taskmanagement.models.tasks.contracts.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TaskRepositoryImpl implements TaskRepository {
+public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     public static final String MEMBER_EXISTS_MESSAGE = "Member with name %s already exists.";
     public static final String TEAM_EXISTS_MESSAGE = "Team with name %s already exists.";
@@ -49,7 +49,7 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     private Member loggedMember;
 
-    public TaskRepositoryImpl() {
+    public TaskManagementRepositoryImpl() {
         nextId = 0;
     }
 
@@ -71,6 +71,10 @@ public class TaskRepositoryImpl implements TaskRepository {
     @Override
     public List<Member> getMembers() {
         return new ArrayList<>(members);
+    }
+
+    public List<Comment> getComments() {
+        return new ArrayList<>(comments);
     }
 
     @Override

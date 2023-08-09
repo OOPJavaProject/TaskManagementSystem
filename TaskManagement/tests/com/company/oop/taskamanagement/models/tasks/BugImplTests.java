@@ -10,17 +10,37 @@ import org.junit.platform.engine.TestExecutionResult;
 
 public class BugImplTests {
 
-    public static final int VALID_ID = 1;
-    public static final String VALID_TITLE = "Test name for bug";
-    public static final String VALID_DESCRIPTION = "Test description for bug";
-//    public static final Member VALID_ASSIGNEE = "Misho";
+    //Think about before each
 
     @Test
-    public void constructor_Should_InitializeName_When_ArgumentsValid() {
-        //TODO I NEED TO IMPLEMENT MEMBER CLASS IN ORDER TO WRITE THE TESTS
-//        BugImpl bug = new BugImpl(VALID_ID,VALID_TITLE, VALID_DESCRIPTION, Priority.HIGH, Severity.MAJOR, VALID_ASSIGNEE);
+    public void constructor_Should_InitializeComments_When_ArgumentsValid() {
+
     }
 
+    @Test
+    public void constructor_Should_InitializeHistory_When_ArgumentsValid() {
+
+
+    }
+
+    @Test
+    public void constructor_Should_InitializeTaskType_When_ArgumentsValid() {
+
+    }
+
+    @Test
+    public void constructor_Should_LogEvent_When_ArgumentsValid() {
+
+    }
+
+    @Test
+    public void constructor_Should_InitializeSeverity_WhenArgumentsAreValid() {
+
+    }
+    @Test
+    public void constructor_Should_InitializeId_When_ArgumentsValid() {
+
+    }
     @Test
     public void constructor_Should_InitializeTitle_When_ArgumentsValid() {
 
@@ -72,17 +92,56 @@ public class BugImplTests {
     }
 
     @Test
-    public void setAssignee_Should_AssignMemberToTask_When_ValidArguments() {
-
-    }
-
-    @Test
     public void getSteps_Should_ReturnNewCollection_When_Invoked() {
 
     }
+    @Test
+    public void getComments_Should_ReturnNewCollection_When_Invoked() {
+
+    }
 
     @Test
-    public void changeStatus_Should_changeCurrentStatus_When_ValidArguments() {
+    public void getHistoryChanges_Should_ReturnNewCollection_When_Invoked() {
+
+    }
+
+    @Test
+    public void progressStatus_Should_assignTheNextStatus_When_Invoked() {
+
+    }
+
+    @Test
+    public void progressStatus_Should_ThrowException_When_StatusCannotBeProgressedFurther() {
+
+    }
+
+    @Test
+    public void revertStatus_Should_assignThePreviousStatus_When_Invoked() {
+
+    }
+
+    @Test
+    public void revertStatus_Should_ThrowException_When_StatusCannotBeRevertedFurther() {
+
+    }
+
+    @Test
+    public void addComment_Should_addCommentToTask() {
+
+    }
+
+    @Test
+    public void removeComment_Should_RemoveCommentFromTask_When_Comment_Exists() {
+
+    }
+
+    @Test
+    public void removeComment_Should_ThrowException_When_CommentDoesNotExist() {
+
+    }
+
+    @Test
+    public void logEvent_Should_CreateNewEvent_When_Invoked() {
 
     }
 

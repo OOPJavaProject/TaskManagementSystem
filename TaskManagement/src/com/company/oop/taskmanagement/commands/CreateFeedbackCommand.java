@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
@@ -14,8 +14,8 @@ public class CreateFeedbackCommand extends BaseCommand {
     public static final String RATING_ERR_MESSAGE = "Rating must be a number!";
 
 
-    public CreateFeedbackCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public CreateFeedbackCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

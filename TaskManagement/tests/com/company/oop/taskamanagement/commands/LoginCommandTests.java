@@ -2,9 +2,8 @@ package com.company.oop.taskamanagement.commands;
 
 import com.company.oop.taskamanagement.utils.TestUtilities;
 import com.company.oop.taskmanagement.commands.LoginCommand;
-import com.company.oop.taskmanagement.core.TaskRepositoryImpl;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
-import com.company.oop.taskmanagement.models.MemberImpl;
+import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,12 +15,12 @@ public class LoginCommandTests {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
 
-    private TaskRepository repository;
+    private TaskManagementRepository repository;
     private LoginCommand loginCommand;
 
     @BeforeEach
     public void before() {
-        repository = new TaskRepositoryImpl();
+        repository = new TaskManagementRepositoryImpl();
         loginCommand = new LoginCommand(repository);
     }
 
@@ -97,7 +96,7 @@ public class LoginCommandTests {
         Assertions.assertEquals(repository.getLoggedInMember().getUsername(), memberToLogIn.getUsername());
     }
 
-    public static Member loginInitializedUserToRepository(TaskRepository repository) {
+    public static Member loginInitializedUserToRepository(TaskManagementRepository repository) {
         Member testMember = MemberImplTests.initializeTestMember();
         repository.addMember(testMember);
         repository.login(testMember);

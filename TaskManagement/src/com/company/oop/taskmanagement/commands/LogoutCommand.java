@@ -1,7 +1,6 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
-import com.company.oop.taskmanagement.models.tasks.contracts.Task;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
@@ -9,8 +8,8 @@ public class LogoutCommand extends BaseCommand{
 
     public final static String MEMBER_LOGGED_OUT = "You logged out!";
 
-    public LogoutCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public LogoutCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
-import com.company.oop.taskmanagement.models.contracts.Team;
 import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.StorySize;
 import com.company.oop.taskmanagement.models.tasks.contracts.Story;
@@ -17,8 +16,8 @@ public class CreateStoryCommand extends BaseCommand{
     public static final String STORY_CREATED = "Story with title %s was created!";
 
 
-    public CreateStoryCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public CreateStoryCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

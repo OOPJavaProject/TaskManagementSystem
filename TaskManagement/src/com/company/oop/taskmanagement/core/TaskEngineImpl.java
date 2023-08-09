@@ -3,7 +3,7 @@ package com.company.oop.taskmanagement.core;
 import com.company.oop.taskmanagement.commands.contracts.Command;
 import com.company.oop.taskmanagement.core.contracts.CommandFactory;
 import com.company.oop.taskmanagement.core.contracts.Engine;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,11 +20,11 @@ public class TaskEngineImpl implements Engine {
         private static final String REPORT_SEPARATOR = "####################";
 
         private final CommandFactory commandFactory;
-        private final TaskRepository taskRepository;
+        private final TaskManagementRepository taskManagementRepository;
 
         public TaskEngineImpl() {
             this.commandFactory = new CommandFactoryImpl();
-            this.taskRepository = new TaskRepositoryImpl();
+            this.taskManagementRepository = new TaskManagementRepositoryImpl();
         }
 
         public void start() {
@@ -53,7 +53,7 @@ public class TaskEngineImpl implements Engine {
         private void processCommand(String inputLine) {
             String commandName = extractCommandName(inputLine);
             List<String> parameters = extractCommandParameters(inputLine);
-            Command command = commandFactory.createCommandFromCommandName(commandName, taskRepository);
+            Command command = commandFactory.createCommandFromCommandName(commandName, taskManagementRepository);
             String executionResult = command.execute(parameters);
             print(executionResult);
         }

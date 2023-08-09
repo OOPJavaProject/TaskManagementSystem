@@ -1,7 +1,7 @@
 package com.company.oop.taskmanagement.commands;
 
 import com.company.oop.taskmanagement.commands.contracts.Command;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
@@ -9,19 +9,19 @@ public abstract class BaseCommand implements Command {
 
     private final static String USER_NOT_LOGGED = "You are not logged in! Please login first!";
 
-    private final TaskRepository taskRepository;
+    private final TaskManagementRepository taskManagementRepository;
 
-    protected BaseCommand(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    protected BaseCommand(TaskManagementRepository taskManagementRepository) {
+        this.taskManagementRepository = taskManagementRepository;
     }
 
-    protected TaskRepository getTaskRepository() {
-        return taskRepository;
+    protected TaskManagementRepository getTaskRepository() {
+        return taskManagementRepository;
     }
 
     @Override
     public String execute(List<String> parameters) {
-        if (requiresLogin() && !taskRepository.hasLoggedInMember()) {
+        if (requiresLogin() && !taskManagementRepository.hasLoggedInMember()) {
             throw new IllegalArgumentException(USER_NOT_LOGGED);
         }
         return executeCommand(parameters);
