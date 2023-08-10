@@ -3,11 +3,10 @@ package com.company.oop.taskmanagement.models.tasks;
 import com.company.oop.taskmanagement.models.EventLog;
 import com.company.oop.taskmanagement.models.contracts.ActivityHistory;
 import com.company.oop.taskmanagement.models.contracts.Comment;
-import com.company.oop.taskmanagement.models.enums.Priority;
+import com.company.oop.taskmanagement.models.contracts.Status;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.Validation;
-import com.company.oop.taskmanagement.models.contracts.Status;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +33,6 @@ public abstract class TaskImpl implements Task {
     private int id;
     private String title;
     private String description;
-
     private TaskType taskType;
     private final List<Comment> comments;
     private final List<ActivityHistory> history;
@@ -51,7 +49,6 @@ public abstract class TaskImpl implements Task {
 
         logEvent(String.format(TASK_CREATED_LOG, tasktype.toString(), title));
     }
-
 
     //protected, so that subclasses can add history of changes on their progress
     protected void logEvent(String event) {
@@ -102,14 +99,24 @@ public abstract class TaskImpl implements Task {
         return status;
     }
 
-    public TaskType getTaskType(){
+    public TaskType getTaskType() {
         //TODO should it be removed? replacement with substring.
         return this.taskType;
     }
 
-    protected void setStatus(Status status){
+    @Override
+    public String toString() {
+        return String.format("""
+                Title: %s
+                Description: %s
+                Status: %s
+                """, title, description, status);
+    }
+
+    protected void setStatus(Status status) {
         this.status = status;
     }
+
     private void setId(int id) {
         this.id = id;
     }
@@ -124,16 +131,9 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    protected void setTaskType(TaskType type){
+    protected void setTaskType(TaskType type) {
         this.taskType = type;
     }
 
-    @Override
-    public String toString() {
-        return String.format("""
-                Title: %s
-                Description: %s
-                Status: %s
-                """, title, description, status);
-    }
+
 }

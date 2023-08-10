@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagement.models;
 
+import com.company.oop.taskmanagement.exceptions.ElementNotFoundException;
 import com.company.oop.taskmanagement.models.contracts.ActivityHistory;
 import com.company.oop.taskmanagement.models.contracts.Board;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
@@ -34,6 +35,7 @@ public class BoardImpl implements Board {
             %s
             ----------
             """;
+    public static final String REMOVE_ERR_MSG = "The task you are trying to remove does not exist!";
 
     private String boardName;
     private final List<Task> tasks = new ArrayList<>();
@@ -64,18 +66,22 @@ public class BoardImpl implements Board {
         for (Task task : tasksList) {
             logEvent(String.format(TASK_HAS_BEEN_ADDED, task.getTitle()));
         }
-
     }
 
+    @Override
     public void addTask(Task task) {
         this.tasks.add(task);
-
         logEvent(String.format(TASK_HAS_BEEN_ADDED, task.getTitle()));
     }
 
+    @Override
     public void removeTask(Task task) {
-        this.tasks.remove(task);
-        logEvent(String.format(TASK_HAS_BEEN_REMOVED, task.getTitle()));
+        if (tasks.contains(task)) {
+            this.tasks.remove(task);
+            logEvent(String.format(TASK_HAS_BEEN_REMOVED, task.getTitle()));
+        } else {
+            throw new ElementNotFoundException(REMOVE_ERR_MSG);
+        }
     }
 
     @Override

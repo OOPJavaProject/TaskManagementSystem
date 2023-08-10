@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
@@ -21,7 +21,7 @@ public class AssignCommand extends BaseCommand {
     public static final String TASK_ASSIGNED_TO_MEMBER = "Member %s was assigned a task.";
 
 
-    public AssignCommand(TaskRepository taskRepository) {
+    public AssignCommand(TaskManagementRepository taskRepository) {
         super(taskRepository);
     }
 
@@ -37,9 +37,9 @@ public class AssignCommand extends BaseCommand {
 
     private String assignTaskToMember(Member member, Task task) {
         member.addTask(task);
-        try{
-            ((PrioritableTask)task).changeAssignee(member);
-        }catch (ClassCastException e){
+        try {
+            ((PrioritableTask) task).changeAssignee(member);
+        } catch (ClassCastException e) {
             System.out.println("\n");
         }
 

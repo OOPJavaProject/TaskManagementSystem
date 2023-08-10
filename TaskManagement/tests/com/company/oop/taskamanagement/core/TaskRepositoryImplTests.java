@@ -35,6 +35,11 @@ public class TaskRepositoryImplTests {
     }
 
     @Test
+    public void constructor_Should_InitializeComments() {
+
+    }
+
+    @Test
     public void getTeams_Should_ReturnCopyOfCollection() {
 
     }
@@ -51,6 +56,11 @@ public class TaskRepositoryImplTests {
 
     @Test
     public void getBoards_Should_ReturnCopyOfCollection() {
+
+    }
+
+    @Test
+    public void getComments_Should_ReturnCopyOfCollection() {
 
     }
 
@@ -115,6 +125,11 @@ public class TaskRepositoryImplTests {
     }
 
     @Test
+    public void createComment_Should_AddToComments_When_ArgumentsAreValid() {
+
+    }
+
+    @Test
     public void findBoardByName_Should_ReturnBoard_When_BoardExists() {
 
     }
@@ -141,6 +156,16 @@ public class TaskRepositoryImplTests {
 
     @Test
     public void findMemberByName_Should_ThrowException_When_MemberDoesNotExist() {
+
+    }
+
+    @Test
+    public void findTaskById_Should_ReturnTask_When_ArgumentsValid() {
+
+    }
+
+    @Test
+    public void findTaskById_Should_ThrowException_When_InvalidId() {
 
     }
 

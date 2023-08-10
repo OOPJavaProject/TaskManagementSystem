@@ -72,6 +72,8 @@ public class MemberImpl implements Member {
     private String name;
     private String username;
     private String password;
+
+    private String teamName;
     private final List<Task> tasks = new ArrayList<>();
 
     private final List<ActivityHistory> activityLog = new ArrayList<>();
@@ -164,6 +166,8 @@ public class MemberImpl implements Member {
         }
         return result.toString();
     }
+
+    @Override
     public String printHistory() {
         StringBuilder historyLogString = new StringBuilder();
 
@@ -192,6 +196,7 @@ public class MemberImpl implements Member {
         }
         logEvent(String.format(MEMBER_HAS_LOGGED_IN, getName()));
         isLoggedIn = true;
+        //TODO not sure if this will need in future
     }
 
     public void logOut(){
@@ -200,6 +205,7 @@ public class MemberImpl implements Member {
         }
         logEvent(String.format(MEMBER_HAS_LOGGED_OUT, getName()));
         this.isLoggedIn = false;
+        //TODO not sure if this will need in future
     }
     @Override
     public boolean isLoggedIn() {
@@ -227,7 +233,7 @@ public class MemberImpl implements Member {
         this.name = name;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         Validation.validateStringRange(username, USERNAME_LEN_MIN, USERNAME_LEN_MAX, USERNAME_LEN_ERR);
         this.username = username;
     }

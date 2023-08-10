@@ -6,17 +6,16 @@ import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
 
-public abstract class AbstractPrioritable extends TaskImpl implements PrioritableTask {
-
-
+public abstract class AbstractPrioritizable extends TaskImpl implements PrioritableTask {
     private Priority priority;
     private Member assignee;
 
-    public AbstractPrioritable(int id, String title, String description, Status status, TaskType tasktype, Priority priority, Member assignee) {
+    public AbstractPrioritizable(int id, String title, String description, Status status, TaskType tasktype, Priority priority, Member assignee) {
         super(id, title, description, status, tasktype);
         setPriority(priority);
         setAssignee(assignee);
     }
+
     @Override
     public Priority getPriority() {
         return this.priority;
@@ -32,16 +31,26 @@ public abstract class AbstractPrioritable extends TaskImpl implements Prioritabl
         setPriority(priority);
     }
 
-    private void setPriority(Priority priority){
+    @Override
+    public void changeAssignee(Member member) {
+        setAssignee(member);
+    }
+
+    private void setPriority(Priority priority) {
         this.priority = priority;
     }
+
     private void setAssignee(Member assignee) {
         //TODO POSSIBLE VALIDATION OF TEAM MEMBER
         this.assignee = assignee;
     }
 
     @Override
-    public void changeAssignee(Member member) {
-        setAssignee(member);
+    public String toString() {
+        return String.format("""
+                %s
+                Priority: %s
+                Assignee: %s
+                """,super.toString(), getPriority(), getAssignee().getName());
     }
 }

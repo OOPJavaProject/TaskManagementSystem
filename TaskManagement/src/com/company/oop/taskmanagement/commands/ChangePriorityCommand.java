@@ -1,13 +1,8 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.commands.contracts.Command;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.enums.Priority;
-import com.company.oop.taskmanagement.models.enums.TaskType;
-import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
 import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
-import com.company.oop.taskmanagement.models.tasks.contracts.Story;
-import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
 
@@ -22,7 +17,7 @@ public class ChangePriorityCommand extends BaseCommand {
     private static final String INVALID_TASK_TYPE = "Feedback has no priority option.";
     private static final String PRIORITY_CHANGED = "Priority was set successfully";
 
-    public ChangePriorityCommand(TaskRepository taskRepository) {
+    public ChangePriorityCommand(TaskManagementRepository taskRepository) {
         super(taskRepository);
     }
 

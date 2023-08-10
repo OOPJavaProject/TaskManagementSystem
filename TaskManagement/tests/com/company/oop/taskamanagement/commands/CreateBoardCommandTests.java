@@ -1,21 +1,25 @@
 package com.company.oop.taskamanagement.commands;
 
-import com.company.oop.taskmanagement.commands.CreateBugCommand;
+import com.company.oop.taskmanagement.commands.CreateBoardCommand;
 import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CreateBugCommandTests{
-
+public class CreateBoardCommandTests {
 
     private TaskManagementRepository taskManagementRepository;
-    private CreateBugCommand command;
+    private CreateBoardCommand command;
 
     @BeforeEach
     public void before() {
         taskManagementRepository = new TaskManagementRepositoryImpl();
-        command = new CreateBugCommand(taskManagementRepository);
+        command = new CreateBoardCommand(taskManagementRepository);
+    }
+
+    @Test
+    public void executeCommand_Should_CreateBoard_When_ValidArgumentsCount() {
+
     }
 
     @Test
@@ -24,27 +28,27 @@ public class CreateBugCommandTests{
     }
 
     @Test
-    public void executeCommand_Should_CreateBug_When_ValidArgumentsCount() {
+    public void executeCommand_Should_CreateBoard_When_ExistingTeamName() {
 
     }
 
     @Test
-    public void executeCommand_Should_ThrowException_When_AssigneeDoesNotExist() {
+    public void executeCommand_Should_CreateBoard_When_UniqueInTeam() {
 
     }
 
     @Test
-    public void executeCommand_Should_CreateBug_When_AssigneeExists() {
+    public void executeCommand_Should_ThrowException_When_BoardExistsInTeam() {
 
     }
 
     @Test
-    public void executeCommand_Should_CreateBug_When_ValidArguments() {
+    public void executeCommand_Should_ThrowException_When_NonExistingTeam() {
 
     }
 
     @Test
-    public void executeCommand_Should_CreateBug_When_MemberLoggedIn() {
+    public void executeCommand_Should_CreateBoard_When_MemberLoggedIn() {
 
     }
 
@@ -52,6 +56,6 @@ public class CreateBugCommandTests{
     public void executeCommand_Should_ThrowException_When_NoMemberLogged() {
 
     }
+
+
 }
-
-

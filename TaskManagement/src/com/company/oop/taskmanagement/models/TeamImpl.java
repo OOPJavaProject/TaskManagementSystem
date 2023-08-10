@@ -59,16 +59,17 @@ public class TeamImpl implements Team {
         return new ArrayList<>(boards);
     }
 
+    @Override
     public void addMember(Member memberToAdd) {
         this.members.add(memberToAdd);
         logEvent(String.format(MEMBER_ADDED_LOG, memberToAdd.getName()));
     }
-
+    @Override
     public void removeMember(Member memberToRemove) {
         this.members.remove(memberToRemove);
         logEvent(String.format(MEMBER_REMOVED_LOG, memberToRemove.getName()));
     }
-
+    @Override
     public void addBoard(Board board) {
         if (boards.contains(board)) {
             throw new IllegalArgumentException(String.format(BOARD_EXISTS_MESSAGE, board.getName()));
@@ -77,6 +78,7 @@ public class TeamImpl implements Team {
         logEvent(String.format(BOARD_ADDED_LOG, board.getName()));
     }
 
+    @Override
     public void removeBoard(Board board) {
         this.boards.remove(board);
         logEvent(String.format(BOARD_REMOVED_LOG, board.getName()));

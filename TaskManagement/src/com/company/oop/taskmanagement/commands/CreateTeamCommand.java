@@ -8,6 +8,11 @@ import java.util.List;
 
 public class CreateTeamCommand extends BaseCommand{
 
+    /**
+     * creating a team
+     * input: CreateTeam teamName
+     */
+
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String TEAM_CREATED = "Team with name %s was created!";
     private String teamName;

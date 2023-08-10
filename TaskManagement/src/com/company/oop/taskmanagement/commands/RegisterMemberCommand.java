@@ -8,6 +8,11 @@ import java.util.List;
 
 public class RegisterMemberCommand extends BaseCommand{
 
+    /**
+     * registers a non-existing member
+     * input: RegisterMember name username password
+     */
+
     private final static String MEMBER_REGISTERED = "Member %s registered successfully!";
     public final static String MEMBER_LOGGED_IN_ALREADY = "Member %s is logged in! Please log out first!";
     private final static String MEMBER_ALREADY_EXIST = "Member %s already exist. Choose a different username!";

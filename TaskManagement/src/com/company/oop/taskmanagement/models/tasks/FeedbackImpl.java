@@ -1,6 +1,5 @@
 package com.company.oop.taskmanagement.models.tasks;
 
-import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.FeedbackStatus;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
@@ -8,10 +7,9 @@ import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
 public class FeedbackImpl extends TaskImpl implements Feedback {
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Feedback status is already at %s";
-
     private int rating;
 
-    public FeedbackImpl(int id , String title, String description, int rating) {
+    public FeedbackImpl(int id, String title, String description, int rating) {
         super(id, title, description, FeedbackStatus.NEW, TaskType.FEEDBACK);
         setRating(rating);
         setTaskType();
@@ -66,7 +64,7 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
                 """, super.toString(), getRating(), getComments(), getHistoryChanges());
     }
 
-    private void setTaskType(){
+    private void setTaskType() {
         super.setTaskType(TaskType.FEEDBACK);
     }
 
