@@ -4,6 +4,7 @@ import com.company.oop.taskmanagement.models.EventLog;
 import com.company.oop.taskmanagement.models.contracts.ActivityHistory;
 import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.enums.Priority;
+import com.company.oop.taskmanagement.models.enums.TaskStatus.StoryStatus;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.Validation;
@@ -136,4 +137,9 @@ public abstract class TaskImpl implements Task {
                 Status: %s
                 """, title, description, status);
     }
+
+    //TODO Research on wild card and how to use it for the change of status methods
+//    public static <E extends Status> void incrementStatus(<? extends Status> type) {
+//
+//    }
 }

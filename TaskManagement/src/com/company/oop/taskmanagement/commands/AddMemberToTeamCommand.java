@@ -1,6 +1,6 @@
 package com.company.oop.taskmanagement.commands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.exceptions.ElementNotFoundException;
 import com.company.oop.taskmanagement.utilities.Validation;
 
@@ -13,8 +13,8 @@ public class AddMemberToTeamCommand extends BaseCommand {
     public final static String INVALID_USERNAME = "The username %s does not exist.";
     public final static String INVALID_TEAM = "Team with name %s does not exist.";
 
-    public AddMemberToTeamCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    public AddMemberToTeamCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override

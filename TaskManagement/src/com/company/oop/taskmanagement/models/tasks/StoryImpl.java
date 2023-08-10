@@ -14,7 +14,7 @@ import com.company.oop.taskmanagement.models.tasks.contracts.Story;
 public class StoryImpl extends AbstractPrioritable implements Story {
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Story status is already at %s";
-    private static final String STATUS_CHANGED_LOG =" Status has been changed from %s to %s." ;
+    private static final String STATUS_CHANGED_LOG = " Status has been changed from %s to %s.";
     private static final String STATUS_UNSUCCESSFUL_CHANGE_LOG = "Status change has been unsuccessful, current status is: %s.";
     private Priority priority;
     private StorySize size;
@@ -47,13 +47,11 @@ public class StoryImpl extends AbstractPrioritable implements Story {
             setStatus(StoryStatus.IN_PROGRESS);
 
             logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
-        }
-        else if (getStatus() == StoryStatus.IN_PROGRESS) {
+        } else if (getStatus() == StoryStatus.IN_PROGRESS) {
             setStatus(StoryStatus.DONE);
 
             logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
-        }
-        else {
+        } else {
             logEvent(String.format(STATUS_UNSUCCESSFUL_CHANGE_LOG, getStatus()));
             throw new IllegalArgumentException(String.format(STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
         }
@@ -66,13 +64,11 @@ public class StoryImpl extends AbstractPrioritable implements Story {
             setStatus(StoryStatus.IN_PROGRESS);
 
             logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
-        }
-        else if (getStatus() == StoryStatus.IN_PROGRESS) {
+        } else if (getStatus() == StoryStatus.IN_PROGRESS) {
             setStatus(StoryStatus.NOT_DONE);
 
             logEvent(String.format(STATUS_CHANGED_LOG, tempStatus, getStatus()));
-        }
-        else {
+        } else {
             logEvent(String.format(STATUS_UNSUCCESSFUL_CHANGE_LOG, getStatus()));
             throw new IllegalArgumentException(String.format(STATUS_CHANGE_ERROR_MESSAGE, getStatus()));
         }
@@ -94,7 +90,9 @@ public class StoryImpl extends AbstractPrioritable implements Story {
     }
 
 
-
+    public void changeSize(StorySize size) {
+        setSize(size);
+    }
 
     private void setSize(StorySize size) {
         this.size = size;

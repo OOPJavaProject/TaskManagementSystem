@@ -1,68 +1,72 @@
 package com.company.oop.taskmanagement.core;
 
 import com.company.oop.taskmanagement.commands.*;
+import com.company.oop.taskmanagement.commands.CreateCommands.CreateBugCommand;
+import com.company.oop.taskmanagement.commands.CreateCommands.CreateFeedbackCommand;
+import com.company.oop.taskmanagement.commands.CreateCommands.CreateStoryCommand;
+import com.company.oop.taskmanagement.commands.CreateCommands.CreateTeamCommand;
+import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangePriorityCommand;
+import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeSeverityCommand;
 import com.company.oop.taskmanagement.commands.contracts.Command;
 import com.company.oop.taskmanagement.commands.enums.CommandType;
 import com.company.oop.taskmanagement.core.contracts.CommandFactory;
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
-
-import javax.swing.event.ChangeEvent;
 
 public class CommandFactoryImpl implements CommandFactory {
 
     @Override
-    public Command createCommandFromCommandName(String commandTypeAsString, TaskRepository taskRepository) {
+    public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
             switch (commandType) {
                 case REGISTERMEMBER:
-                    return new RegisterMemberCommand(taskRepository);
+                    return new RegisterMemberCommand(taskManagementRepository);
                 case LOGIN:
-                    return new LoginCommand(taskRepository);
+                    return new LoginCommand(taskManagementRepository);
                 case LOGOUT:
-                    return new LogoutCommand(taskRepository);
+                    return new LogoutCommand(taskManagementRepository);
 //                case SHOWMEMBERS:
-//                    return new ShowMembersCommand(taskRepository);
+//                    return new ShowMembersCommand(taskManagementRepository);
 //                case SHOWMEMBERACTIVITY:
-//                    return new ShowMemberActivityCommand(taskRepository);
+//                    return new ShowMemberActivityCommand(taskManagementRepository);
                 case CREATETEAM:
-                    return new CreateTeamCommand(taskRepository);
+                    return new CreateTeamCommand(taskManagementRepository);
 //                case SHOWTEAMS:
-//                    return new ShowTeamsCommand(taskRepository);
+//                    return new ShowTeamsCommand(taskManagementRepository);
 //                case SHOWTEAMACTIVITY:
-//                    return new ShowTeamActivityCommand(taskRepository);
+//                    return new ShowTeamActivityCommand(taskManagementRepository);
 //                case ADDMEMBERTOTEAM:
-//                    return new AddMemberToTeamCommand(taskRepository);
+//                    return new AddMemberToTeamCommand(taskManagementRepository);
 //                case SHOWALLTEAMMEMBERS:
-//                    return new ShowAllTeamMembersCommand(taskRepository);
+//                    return new ShowAllTeamMembersCommand(taskManagementRepository);
 //                case CREATEBOARD:
-//                    return new CreateBoardCommand(taskRepository);
+//                    return new CreateBoardCommand(taskManagementRepository);
 //                case SHOWTEAMBOARDS:
-//                    return new ShowTeamBoardsCommand(taskRepository);
+//                    return new ShowTeamBoardsCommand(taskManagementRepository);
 //                case SHOWBOARDACTIVITY:
-//                    return new ShowBoardActivityCommand(taskRepository);
+//                    return new ShowBoardActivityCommand(taskManagementRepository);
                 case CREATEBUG:
-                    return new CreateBugCommand(taskRepository);
+                    return new CreateBugCommand(taskManagementRepository);
                 case CREATEFEEDBACK:
-                    return new CreateFeedbackCommand(taskRepository);
+                    return new CreateFeedbackCommand(taskManagementRepository);
                 case CREATESTORY:
-                    return new CreateStoryCommand(taskRepository);
+                    return new CreateStoryCommand(taskManagementRepository);
                 case CHANGEPRIORITY:
-                    return new ChangePriorityCommand(taskRepository);
-//                case CHANGESEVERITY:
-//                    return new ChangeSeverityCommand(taskRepository);
+                    return new ChangePriorityCommand(taskManagementRepository);
+                case CHANGESEVERITY:
+                    return new ChangeSeverityCommand(taskManagementRepository);
 //                case CHANGESTATUS:
-//                    return new ChangeStatusCommand(taskRepository);
+//                    return new ChangeStatusCommand(taskManagementRepository);
 //                case CHANGESIZE:
-//                    return new ChangeSizeCommand(taskRepository);
+//                    return new ChangeSizeCommand(taskManagementRepository);
 //                case CHANGERATING:
-//                    return new ChangeRatingCommand(taskRepository);
+//                    return new ChangeRatingCommand(taskManagementRepository);
 //                case ASSIGN:
-//                    return new AssignCommand(taskRepository);
+//                    return new AssignCommand(taskManagementRepository);
 //                case UNASSIGN:
-//                    return new UnassignCommand(taskRepository);
+//                    return new UnassignCommand(taskManagementRepository);
                 case ADDCOMMENT:
-                    return new AddCommentCommand(taskRepository);
+                    return new AddCommentCommand(taskManagementRepository);
                 default:
                     throw new IllegalArgumentException();
             }

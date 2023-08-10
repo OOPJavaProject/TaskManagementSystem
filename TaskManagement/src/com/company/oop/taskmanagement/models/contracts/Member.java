@@ -15,6 +15,8 @@ public interface Member {
     void addComment(Comment comment, Task taskToAddComment);
     String printTasks();
     boolean isLoggedIn();
+    void logAddedToTeam(Team team);
+    void logRemovedFromTeam(Team team);
     List<ActivityHistory> getActivityHistory(); //TODO
     String toString();
 

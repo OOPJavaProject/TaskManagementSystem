@@ -1,5 +1,6 @@
-package com.company.oop.taskmanagement.commands;
+package com.company.oop.taskmanagement.commands.CreateCommands;
 
+import com.company.oop.taskmanagement.commands.BaseCommand;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.enums.Priority;
@@ -10,7 +11,7 @@ import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
 
-public class CreateStoryCommand extends BaseCommand{
+public class CreateStoryCommand extends BaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 5;
     public static final String STORY_CREATED = "Story with title %s was created!";

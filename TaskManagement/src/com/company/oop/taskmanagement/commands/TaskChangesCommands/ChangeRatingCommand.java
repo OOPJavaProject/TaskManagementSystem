@@ -1,9 +1,12 @@
-package com.company.oop.taskmanagement.commands;
+package com.company.oop.taskmanagement.commands.TaskChangesCommands;
 
-import com.company.oop.taskmanagement.core.contracts.TaskRepository;
+
+import com.company.oop.taskmanagement.commands.BaseCommand;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.tasks.FeedbackImpl;
 import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
+import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
 
@@ -15,6 +18,7 @@ public class ChangeRatingCommand extends BaseCommand {
      * @param taskRepository
      */
 
+    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_ID_INPUT = "Invalid input for id, must be a number.";
     private static final String INVALID_TASK_TYPE = "Only feedback has rating";
     private static final String INVALID_RATING_INPUT = "The rating can be between 1..100";
@@ -22,8 +26,8 @@ public class ChangeRatingCommand extends BaseCommand {
 
 
 
-    protected ChangeRatingCommand(TaskRepository taskRepository) {
-        super(taskRepository);
+    protected ChangeRatingCommand(TaskManagementRepository taskManagementRepository) {
+        super(taskManagementRepository);
     }
 
     @Override
@@ -33,6 +37,8 @@ public class ChangeRatingCommand extends BaseCommand {
 
     @Override
     protected String executeCommand(List<String> parameters) {
+        Validation.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
+
         Feedback feedback;
         int id = ParsingHelpers.tryParseInt(parameters.get(0), INVALID_ID_INPUT);
 

@@ -62,11 +62,13 @@ public class TeamImpl implements Team {
     public void addMember(Member memberToAdd) {
         this.members.add(memberToAdd);
         logEvent(String.format(MEMBER_ADDED_LOG, memberToAdd.getName()));
+        memberToAdd.logAddedToTeam(this);
     }
 
     public void removeMember(Member memberToRemove) {
         this.members.remove(memberToRemove);
         logEvent(String.format(MEMBER_REMOVED_LOG, memberToRemove.getName()));
+        memberToRemove.logAddedToTeam(this);
     }
 
     public void addBoard(Board board) {

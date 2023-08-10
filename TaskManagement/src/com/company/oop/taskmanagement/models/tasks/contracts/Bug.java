@@ -11,5 +11,6 @@ public interface Bug extends PrioritableTask{
     List<String> getSteps();
 
     Severity getSeverity();
+    void changeSeverity(Severity newSeverity);
 
 }

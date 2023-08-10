@@ -9,6 +9,7 @@ import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static java.lang.String.format;
 
@@ -50,7 +51,9 @@ public class MemberImpl implements Member {
     private static final String NO_TASKS_MESSAGE = "There are no tasks in the current in the board.";
     private static final String MEMBER_HAS_REMOVED_COMMEND = "Member %s has removed comment from a task with the title %s.";
     private static final String MEMBER_HAS_ADDED_COMMEND = "Member %s has added comment to a task with the title %s.";
-    private static final String MEMBER_NOT_AUTHOR_LOG = "Member %S has tried to remove a comment from task with title %s written by %s";
+    private static final String MEMBER_NOT_AUTHOR_LOG = "Member %s has tried to remove a comment from task with title %s written by %s";
+    private static final String MEMBER_ADDED_TO_TEAM_LOG = "Member %s was added to team %s";
+    private static final String MEMBER_REMOVED_FROM_TEAM_LOG = "Member %s was removed from team %s";
 
     private static final String MEMBER_HAS_LOGGED_IN = "Member %s has logged in.";
     private static final String MEMBER_HAS_LOGGED_OUT = "Member %s has logged out.";
@@ -69,6 +72,8 @@ public class MemberImpl implements Member {
     public static final String TASK_REMOVED_MSG = "Task was successfully removed from the member's tasklist";
     public static final String TASK_NOT_IN_THE_LIST_MSG = "The task you want to remove does not exist in the list.";
     public static final String FAILED_TO_REMOVE_TASK = "Failed to remove task due to non - existence.";
+
+
     private String name;
     private String username;
     private String password;
@@ -143,6 +148,15 @@ public class MemberImpl implements Member {
 
         logEvent(String.format(MEMBER_NOT_AUTHOR_LOG, getName(), taskToRemoveComment.getTitle(), comment.getAuthor()));
         throw new IllegalArgumentException(NOT_THE_AUTHOR_ERR);
+    }
+
+    @Override
+    public void logAddedToTeam(Team team){
+        logEvent(String.format(MEMBER_ADDED_TO_TEAM_LOG, this.getName(), team.getName()));
+    }
+    @Override
+    public void logRemovedFromTeam(Team team){
+        logEvent(String.format(MEMBER_REMOVED_FROM_TEAM_LOG, this.getName(), team.getName()));
     }
 
     @Override

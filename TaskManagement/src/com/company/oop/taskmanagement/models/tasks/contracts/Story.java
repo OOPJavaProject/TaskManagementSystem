@@ -12,4 +12,5 @@ public interface Story extends Task {
     StorySize getSize();
 
     Member getAssignee();
+    void changeSize(StorySize size);
 }

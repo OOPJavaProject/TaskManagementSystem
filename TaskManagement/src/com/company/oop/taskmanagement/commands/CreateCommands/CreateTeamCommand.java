@@ -1,12 +1,13 @@
-package com.company.oop.taskmanagement.commands;
+package com.company.oop.taskmanagement.commands.CreateCommands;
 
+import com.company.oop.taskmanagement.commands.BaseCommand;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Team;
 import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
 
-public class CreateTeamCommand extends BaseCommand{
+public class CreateTeamCommand extends BaseCommand {
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String TEAM_CREATED = "Team with name %s was created!";

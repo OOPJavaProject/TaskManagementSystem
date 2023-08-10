@@ -117,11 +117,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public void addMemberToTeam(String memberUsername, String teamName) {
         Team team = findTeamByName(teamName);
         Member member = findMemberByUserName(memberUsername);
-        if (teams.contains(member))
+
+        if (team.getMembers().contains(member)) {
             throw new IllegalArgumentException(String.format(MEMBER_ALREADY_PRESENT, memberUsername, teamName));
-        for (Team t : getTeams()) {
-            if(t.equals(team)) t.addMember(member);
         }
+        team.addMember(member);
     }
 
 
