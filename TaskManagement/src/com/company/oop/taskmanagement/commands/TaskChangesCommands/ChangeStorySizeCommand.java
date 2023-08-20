@@ -23,7 +23,7 @@ public class ChangeStorySizeCommand extends BaseCommand {
     private static final String INVALID_RATING_INPUT = "The rating can be between 1..100";
     private static final String STORY_SIZE_CHANGED = "Rating has been successfully changed.";
 
-    protected ChangeStorySizeCommand(TaskManagementRepository taskManagementRepository) {
+    public ChangeStorySizeCommand(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 

@@ -20,6 +20,7 @@ public class ChangeSeverityCommand extends BaseCommand {
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_ID_INPUT = "Invalid input for id, must be a number.";
     private static final String INVALID_INPUT = "Invalid id. There was no bug with id %d.";
+    private static final String SEVERITY_CHANGED = "Severity changed successfully";
     //private static final String INVALID_SEVERITY_INPUT = "Invalid input for severity type.";
 
     public ChangeSeverityCommand(TaskManagementRepository taskManagementRepository) {
@@ -45,6 +46,6 @@ public class ChangeSeverityCommand extends BaseCommand {
         Severity severity = ParsingHelpers.tryParseEnum(parameters.get(1), Severity.class);
         bug.changeSeverity(severity);
 
-        return null;
+        return SEVERITY_CHANGED;
     }
 }

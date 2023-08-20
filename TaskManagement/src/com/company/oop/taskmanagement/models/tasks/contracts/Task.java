@@ -24,6 +24,7 @@ public interface Task {
     void removeComment(Comment commentToRemove);
 
     List<ActivityHistory> getHistoryChanges();
+    void changeStatus(Status status);
 
     void progressStatus();
     TaskType getTaskType();

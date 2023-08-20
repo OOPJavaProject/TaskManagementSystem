@@ -13,8 +13,8 @@ public interface Team {
     void addMember(Member memberToAdd);
     void addBoard(Board board);
     void removeBoard(Board board);
-    String printMember();
-    String printBoard();
+    String printMembers();
+    String printBoards();
     void removeMember(Member memberToRemove);
     String toString();
 

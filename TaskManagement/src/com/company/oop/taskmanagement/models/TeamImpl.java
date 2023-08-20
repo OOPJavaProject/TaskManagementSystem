@@ -85,7 +85,7 @@ public class TeamImpl implements Team {
 
     }
 
-    public String printMember() {
+    public String printMembers() {
         if (getMembers().isEmpty()) {
             throw new IllegalArgumentException(NO_MEMBERS_MESSAGE);
         }
@@ -102,7 +102,7 @@ public class TeamImpl implements Team {
         return String.format(MEMBER_PRINT_TEMPLATE, memberNames);
     }
 
-    public String printBoard(){
+    public String printBoards(){
         if (getBoards().isEmpty()) {
             throw new IllegalArgumentException(NO_BOARDS_MESSAGE);
         }

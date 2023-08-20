@@ -40,6 +40,7 @@ public class AssignCommand extends BaseCommand {
         try{
             ((PrioritableTask)task).changeAssignee(member);
         }catch (ClassCastException e){
+            //TODO Check what should have been here
             System.out.println("\n");
         }
 

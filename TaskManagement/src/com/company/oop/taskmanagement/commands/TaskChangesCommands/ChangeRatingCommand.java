@@ -26,7 +26,7 @@ public class ChangeRatingCommand extends BaseCommand {
 
 
 
-    protected ChangeRatingCommand(TaskManagementRepository taskManagementRepository) {
+    public ChangeRatingCommand(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 

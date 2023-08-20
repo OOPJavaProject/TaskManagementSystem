@@ -108,9 +108,14 @@ public abstract class TaskImpl implements Task {
         return this.taskType;
     }
 
+    public void changeStatus(Status status){
+        setStatus(status);
+    }
+
     protected void setStatus(Status status){
         this.status = status;
     }
+
     private void setId(int id) {
         this.id = id;
     }
@@ -129,6 +134,21 @@ public abstract class TaskImpl implements Task {
         this.taskType = type;
     }
 
+
+    /**
+     * Print format of the Task, used for listing
+     * @return String in the format: [{TaskType}] Id:[{id}] Title:{}
+     */
+    public String printTaskByTitle(){
+        StringBuilder result = new StringBuilder();
+
+        result.append(String.format("[%s] ",this.getTaskType().toString()));
+        result.append(String.format("Id: [%d] ",this.getId()));
+        result.append(String.format("Title: %s", this.getTitle()));
+
+        return result.toString();
+    }
+
     @Override
     public String toString() {
         return String.format("""
@@ -142,4 +162,5 @@ public abstract class TaskImpl implements Task {
 //    public static <E extends Status> void incrementStatus(<? extends Status> type) {
 //
 //    }
+
 }

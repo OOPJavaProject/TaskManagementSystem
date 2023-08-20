@@ -5,7 +5,9 @@ import com.company.oop.taskmanagement.commands.CreateCommands.CreateBugCommand;
 import com.company.oop.taskmanagement.commands.CreateCommands.CreateFeedbackCommand;
 import com.company.oop.taskmanagement.commands.CreateCommands.CreateStoryCommand;
 import com.company.oop.taskmanagement.commands.CreateCommands.CreateTeamCommand;
+import com.company.oop.taskmanagement.commands.ShowCommands.ShowAllTeamMembersCommand;
 import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangePriorityCommand;
+import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeRatingCommand;
 import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeSeverityCommand;
 import com.company.oop.taskmanagement.commands.contracts.Command;
 import com.company.oop.taskmanagement.commands.enums.CommandType;
@@ -35,10 +37,10 @@ public class CommandFactoryImpl implements CommandFactory {
 //                    return new ShowTeamsCommand(taskManagementRepository);
 //                case SHOWTEAMACTIVITY:
 //                    return new ShowTeamActivityCommand(taskManagementRepository);
-//                case ADDMEMBERTOTEAM:
-//                    return new AddMemberToTeamCommand(taskManagementRepository);
-//                case SHOWALLTEAMMEMBERS:
-//                    return new ShowAllTeamMembersCommand(taskManagementRepository);
+                case ADDMEMBERTOTEAM:
+                    return new AddMemberToTeamCommand(taskManagementRepository);
+                case SHOWALLTEAMMEMBERS:
+                    return new ShowAllTeamMembersCommand(taskManagementRepository);
 //                case CREATEBOARD:
 //                    return new CreateBoardCommand(taskManagementRepository);
 //                case SHOWTEAMBOARDS:

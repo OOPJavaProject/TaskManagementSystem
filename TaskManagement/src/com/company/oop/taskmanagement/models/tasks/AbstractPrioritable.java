@@ -40,6 +40,7 @@ public abstract class AbstractPrioritable extends TaskImpl implements Prioritabl
         this.assignee = assignee;
     }
 
+
     @Override
     public void changeAssignee(Member member) {
         setAssignee(member);
