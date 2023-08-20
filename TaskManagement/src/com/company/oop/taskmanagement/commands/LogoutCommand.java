@@ -6,6 +6,10 @@ import java.util.List;
 
 public class LogoutCommand extends BaseCommand{
 
+    /**
+     * Logs out the current logged member
+     * input: Logout
+     */
     public final static String MEMBER_LOGGED_OUT = "You logged out!";
 
     public LogoutCommand(TaskManagementRepository taskManagementRepository) {

@@ -10,12 +10,16 @@ public interface Team {
 
     List<Board> getBoards();
 
-    void addMember(Member memberToAdd);
-    void addBoard(Board board);
+    Board createBoard(String name);
+
     void removeBoard(Board board);
     String printMembers();
     String printBoards();
     void removeMember(Member memberToRemove);
     String toString();
+
+    void addMember(Member memberToAdd);
+
+
 
 }

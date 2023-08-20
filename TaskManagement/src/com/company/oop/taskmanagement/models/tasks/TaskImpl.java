@@ -3,8 +3,7 @@ package com.company.oop.taskmanagement.models.tasks;
 import com.company.oop.taskmanagement.models.EventLog;
 import com.company.oop.taskmanagement.models.contracts.ActivityHistory;
 import com.company.oop.taskmanagement.models.contracts.Comment;
-import com.company.oop.taskmanagement.models.enums.Priority;
-import com.company.oop.taskmanagement.models.enums.TaskStatus.StoryStatus;
+import com.company.oop.taskmanagement.models.contracts.Status;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.Validation;
@@ -130,7 +129,7 @@ public abstract class TaskImpl implements Task {
         this.description = description;
     }
 
-    protected void setTaskType(TaskType type){
+    protected void setTaskType(TaskType type) {
         this.taskType = type;
     }
 
@@ -155,7 +154,7 @@ public abstract class TaskImpl implements Task {
                 Title: %s
                 Description: %s
                 Status: %s
-                """, title, description, status);
+                """, this.getTitle(), this.getDescription(), this.getStatus());
     }
 
     //TODO Research on wild card and how to use it for the change of status methods

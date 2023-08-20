@@ -59,30 +59,31 @@ public class TeamImpl implements Team {
         return new ArrayList<>(boards);
     }
 
+    @Override
     public void addMember(Member memberToAdd) {
         this.members.add(memberToAdd);
         logEvent(String.format(MEMBER_ADDED_LOG, memberToAdd.getName()));
         memberToAdd.logAddedToTeam(this);
     }
-
+    @Override
     public void removeMember(Member memberToRemove) {
         this.members.remove(memberToRemove);
         logEvent(String.format(MEMBER_REMOVED_LOG, memberToRemove.getName()));
         memberToRemove.logAddedToTeam(this);
     }
 
-    public void addBoard(Board board) {
-        if (boards.contains(board)) {
-            throw new IllegalArgumentException(String.format(BOARD_EXISTS_MESSAGE, board.getName()));
-        }
+    @Override
+    public Board createBoard(String name) {
+        Board board = new BoardImpl(name);
         this.boards.add(board);
         logEvent(String.format(BOARD_ADDED_LOG, board.getName()));
+        return board;
     }
 
+    @Override
     public void removeBoard(Board board) {
         this.boards.remove(board);
         logEvent(String.format(BOARD_REMOVED_LOG, board.getName()));
-
     }
 
     public String printMembers() {
@@ -122,8 +123,8 @@ public class TeamImpl implements Team {
 
     @Override
     public String toString(){
-        //TODO
-        return getName();
+        return String.format("""
+                %n%s""", getName());
     }
     private void logEvent(String event) {
         this.history.add(new EventLog(event));

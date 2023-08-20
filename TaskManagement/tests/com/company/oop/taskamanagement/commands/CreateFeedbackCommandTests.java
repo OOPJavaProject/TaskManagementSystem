@@ -1,45 +1,50 @@
 package com.company.oop.taskamanagement.commands;
 
 import com.company.oop.taskmanagement.commands.CreateBugCommand;
-import com.company.oop.taskmanagement.commands.CreateStoryCommand;
+import com.company.oop.taskmanagement.commands.CreateFeedbackCommand;
 import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CreateStoryCommandTests {
+public class CreateFeedbackCommandTests {
 
     private TaskManagementRepository taskManagementRepository;
-    private CreateStoryCommand command;
+    private CreateFeedbackCommand command;
 
     @BeforeEach
     public void before() {
         taskManagementRepository = new TaskManagementRepositoryImpl();
-        command = new CreateStoryCommand(taskManagementRepository);
+        command = new CreateFeedbackCommand(taskManagementRepository);
     }
 
     @Test
-    public void executeCommand_Should_CreateStory_When_ValidArguments() {
-
-    }
-
-    @Test
-    public void executeCommand_Should_CreateStory_When_ValidArgumentsCount() {
+    public void executeCommand_Should_CreateFeedback_When_ValidRating() {
 
     }
 
     @Test
-    public void executeCommand_Should_CreateStory_When_AssigneeExists() {
+    public void executeCommand_Should_ThrowException_When_InvalidRating() {
 
     }
 
     @Test
-    public void executeCommand_Should_ThrowException_When_AssigneeDoesNotExist() {
+    public void executeCommand_Should_ThrowException_When_InvalidArgumentsCount() {
 
     }
 
     @Test
-    public void executeCommand_Should_CreateStory_When_MemberLoggedIn() {
+    public void executeCommand_Should_CreateFeedback_When_ValidArgumentsCount() {
+
+    }
+
+    @Test
+    public void executeCommand_Should_CreateFeedback_When_ValidArguments() {
+
+    }
+
+    @Test
+    public void executeCommand_Should_CreateFeedback_When_MemberLoggedIn() {
 
     }
 
@@ -47,5 +52,6 @@ public class CreateStoryCommandTests {
     public void executeCommand_Should_ThrowException_When_NoMemberLogged() {
 
     }
+
 
 }

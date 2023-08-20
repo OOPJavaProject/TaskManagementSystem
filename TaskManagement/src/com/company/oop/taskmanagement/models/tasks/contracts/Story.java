@@ -5,7 +5,7 @@ import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.StorySize;
 
 
-public interface Story extends Task {
+public interface Story extends PrioritizableTask {
 
     Priority getPriority();
 

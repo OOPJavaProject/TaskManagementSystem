@@ -13,4 +13,13 @@ public interface Board {
     List<ActivityHistory> getActivityHistory(); //TODO
 
     String toString();
+
+    void addTask(Task task);
+
+    void removeTask(Task task);
+
+    String printHistory();
+
+    String printTasks();
+
 }

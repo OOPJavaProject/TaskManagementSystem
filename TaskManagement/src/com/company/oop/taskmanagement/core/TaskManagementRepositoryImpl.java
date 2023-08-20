@@ -28,12 +28,10 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     public static final String TEAM_NOT_EXIST_MESSAGE = "Team with name %s does not exist!";
     public static final String BOARD_NOT_EXIST_MESSAGE = "Board with name %s does not exist!";
     public static final String MEMBER_NOT_EXIST_MESSAGE = "Member with name %s does not exist!";
-
     public static final String MEMBER_USERNAME_NOT_EXIST_MESSAGE = "Member with username %s does not exist!";
-    public static final String TASK_NOT_EXIST_MESSAGE = "Task with ID%d does not exist!";
+    public static final String TASK_NOT_EXIST_MESSAGE = "Task with ID %d does not exist!";
     public static final String NO_LOGGED_IN_MEMBER = "There is no logged in member";
     public static final String MEMBER_ALREADY_PRESENT = "Member %s is already present in team %s";
-
 
     private int nextId;
 
@@ -43,9 +41,9 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     private final List<Task> tasks = new ArrayList<>();
 
-    private final List<Board> boards = new ArrayList<>();
-
     private final List<Comment> comments = new ArrayList<>();
+
+    private final List<PrioritizableTask> prioritizableTasks = new ArrayList<>();
 
     private Member loggedMember;
 
@@ -61,11 +59,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public List<Team> getTeams() {
         return new ArrayList<>(teams);
-    }
-
-    @Override
-    public List<Board> getBoards() {
-        return new ArrayList<>(boards);
     }
 
     @Override
@@ -90,9 +83,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public boolean boardExists(String boardName) {
-        for (Board board : boards) {
-            if (board.getName().equals(boardName)) {
-                return true;
+        for (Team team : teams) {
+            for (Board board : team.getBoards()) {
+                if (board.getName().equals(boardName)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -124,7 +119,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         team.addMember(member);
     }
 
-
     @Override
     public Team findTeamByName(String teamName) {
         for (Team team : teams) {
@@ -137,9 +131,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Board findBoardByName(String boardName) {
-        for (Board board : boards) {
-            if (board.getName().equals(boardName)) {
-                return board;
+        for (Team team : teams) {
+            for (Board board : team.getBoards()) {
+                if (board.getName().equals(boardName))  {
+                    return board;
+                }
             }
         }
         throw new ElementNotFoundException(String.format(BOARD_NOT_EXIST_MESSAGE, boardName));
@@ -176,9 +172,21 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
+    public PrioritizableTask findPrioritizableTaskById(int id) {
+        for (PrioritizableTask task : prioritizableTasks) {
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+        throw new ElementNotFoundException(String.format(TASK_NOT_EXIST_MESSAGE, id));
+    }
+
+    @Override
     public Bug createBug(String title, String description, Priority priority, Severity severity, Member assignee) {
         Bug bug = new BugImpl(++nextId, title, description, priority, severity, assignee);
+        assignee.addTask(bug);
         this.tasks.add(bug);
+        this.prioritizableTasks.add(bug);
         return bug;
     }
 
@@ -192,7 +200,9 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     @Override
     public Story createStory(String title, String description, Priority priority, StorySize size, Member assignee) {
         Story story = new StoryImpl(++nextId, title, description, priority, size, assignee);
+        assignee.addTask(story);
         this.tasks.add(story);
+        this.prioritizableTasks.add(story);
         return story;
     }
 
@@ -205,13 +215,6 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
             this.members.add(member);
             return member;
         }
-    }
-
-    @Override
-    public Board createBoard(String name) {
-        Board board = new BoardImpl(name);
-        this.boards.add(board);
-        return board;
     }
 
     @Override
@@ -233,8 +236,15 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
-    public void assignTaskToMember(Member member, Task task) {
+    public void assignTaskToMember(Member member, PrioritizableTask task) {
         member.addTask(task);
+        task.changeAssignee(member);
+    }
+
+    @Override
+    public void unassignTaskFromMember(Member member, PrioritizableTask task) {
+        member.removeTask(task);
+        task.changeAssignee(null);
     }
 
     @Override

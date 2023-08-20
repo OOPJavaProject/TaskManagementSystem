@@ -1,9 +1,6 @@
-package com.company.oop.taskmanagement.commands.TaskChangesCommands;
+package com.company.oop.taskmanagement.commands;
 
-
-import com.company.oop.taskmanagement.commands.BaseCommand;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
-import com.company.oop.taskmanagement.models.tasks.FeedbackImpl;
 import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
@@ -18,7 +15,7 @@ public class ChangeRatingCommand extends BaseCommand {
      * @param taskRepository
      */
 
-    private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private static final String INVALID_ID_INPUT = "Invalid input for id, must be a number.";
     private static final String INVALID_TASK_TYPE = "Only feedback has rating";
     private static final String INVALID_RATING_INPUT = "The rating can be between 1..100";

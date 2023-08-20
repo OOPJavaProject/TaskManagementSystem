@@ -1,14 +1,10 @@
 package com.company.oop.taskmanagement.core;
 
 import com.company.oop.taskmanagement.commands.*;
+import com.company.oop.taskmanagement.commands.ChangePriorityCommand;
 import com.company.oop.taskmanagement.commands.CreateCommands.CreateBugCommand;
 import com.company.oop.taskmanagement.commands.CreateCommands.CreateFeedbackCommand;
 import com.company.oop.taskmanagement.commands.CreateCommands.CreateStoryCommand;
-import com.company.oop.taskmanagement.commands.CreateCommands.CreateTeamCommand;
-import com.company.oop.taskmanagement.commands.ShowCommands.ShowAllTeamMembersCommand;
-import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangePriorityCommand;
-import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeRatingCommand;
-import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeSeverityCommand;
 import com.company.oop.taskmanagement.commands.contracts.Command;
 import com.company.oop.taskmanagement.commands.enums.CommandType;
 import com.company.oop.taskmanagement.core.contracts.CommandFactory;
@@ -18,57 +14,57 @@ import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 public class CommandFactoryImpl implements CommandFactory {
 
     @Override
-    public Command createCommandFromCommandName(String commandTypeAsString, TaskManagementRepository taskManagementRepository) {
+    public Command createCommandFromCommandName(String commandTypeAsString, TaskRepository taskRepository) {
         CommandType commandType = ParsingHelpers.tryParseEnum(commandTypeAsString, CommandType.class);
             switch (commandType) {
                 case REGISTERMEMBER:
-                    return new RegisterMemberCommand(taskManagementRepository);
+                    return new RegisterMemberCommand(taskRepository);
                 case LOGIN:
-                    return new LoginCommand(taskManagementRepository);
+                    return new LoginCommand(taskRepository);
                 case LOGOUT:
-                    return new LogoutCommand(taskManagementRepository);
+                    return new LogoutCommand(taskRepository);
 //                case SHOWMEMBERS:
-//                    return new ShowMembersCommand(taskManagementRepository);
+//                    return new ShowMembersCommand(taskRepository);
 //                case SHOWMEMBERACTIVITY:
-//                    return new ShowMemberActivityCommand(taskManagementRepository);
+//                    return new ShowMemberActivityCommand(taskRepository);
                 case CREATETEAM:
-                    return new CreateTeamCommand(taskManagementRepository);
+                    return new CreateTeamCommand(taskRepository);
 //                case SHOWTEAMS:
-//                    return new ShowTeamsCommand(taskManagementRepository);
+//                    return new ShowTeamsCommand(taskRepository);
 //                case SHOWTEAMACTIVITY:
-//                    return new ShowTeamActivityCommand(taskManagementRepository);
-                case ADDMEMBERTOTEAM:
-                    return new AddMemberToTeamCommand(taskManagementRepository);
-                case SHOWALLTEAMMEMBERS:
-                    return new ShowAllTeamMembersCommand(taskManagementRepository);
+//                    return new ShowTeamActivityCommand(taskRepository);
+//                case ADDMEMBERTOTEAM:
+//                    return new AddMemberToTeamCommand(taskRepository);
+//                case SHOWALLTEAMMEMBERS:
+//                    return new ShowAllTeamMembersCommand(taskRepository);
 //                case CREATEBOARD:
-//                    return new CreateBoardCommand(taskManagementRepository);
+//                    return new CreateBoardCommand(taskRepository);
 //                case SHOWTEAMBOARDS:
-//                    return new ShowTeamBoardsCommand(taskManagementRepository);
+//                    return new ShowTeamBoardsCommand(taskRepository);
 //                case SHOWBOARDACTIVITY:
-//                    return new ShowBoardActivityCommand(taskManagementRepository);
+//                    return new ShowBoardActivityCommand(taskRepository);
                 case CREATEBUG:
-                    return new CreateBugCommand(taskManagementRepository);
+                    return new CreateBugCommand(taskRepository);
                 case CREATEFEEDBACK:
-                    return new CreateFeedbackCommand(taskManagementRepository);
+                    return new CreateFeedbackCommand(taskRepository);
                 case CREATESTORY:
-                    return new CreateStoryCommand(taskManagementRepository);
+                    return new CreateStoryCommand(taskRepository);
                 case CHANGEPRIORITY:
-                    return new ChangePriorityCommand(taskManagementRepository);
-                case CHANGESEVERITY:
-                    return new ChangeSeverityCommand(taskManagementRepository);
+                    return new ChangePriorityCommand(taskRepository);
+//                case CHANGESEVERITY:
+//                    return new ChangeSeverityCommand(taskRepository);
 //                case CHANGESTATUS:
-//                    return new ChangeStatusCommand(taskManagementRepository);
+//                    return new ChangeStatusCommand(taskRepository);
 //                case CHANGESIZE:
-//                    return new ChangeSizeCommand(taskManagementRepository);
+//                    return new ChangeSizeCommand(taskRepository);
 //                case CHANGERATING:
-//                    return new ChangeRatingCommand(taskManagementRepository);
+//                    return new ChangeRatingCommand(taskRepository);
 //                case ASSIGN:
-//                    return new AssignCommand(taskManagementRepository);
+//                    return new AssignCommand(taskRepository);
 //                case UNASSIGN:
-//                    return new UnassignCommand(taskManagementRepository);
+//                    return new UnassignCommand(taskRepository);
                 case ADDCOMMENT:
-                    return new AddCommentCommand(taskManagementRepository);
+                    return new AddCommentCommand(taskRepository);
                 default:
                     throw new IllegalArgumentException();
             }

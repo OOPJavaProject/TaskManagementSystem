@@ -48,7 +48,7 @@ public class MemberImpl implements Member {
 
     private static final String MEMBER_NOT_LOGGED_IN_TO_LOG_OUT = "This user is not yet logged in.";
     private static final String MEMBER_REGISTERED_MSG = "Member with name %s has been registered";
-    private static final String NO_TASKS_MESSAGE = "There are no tasks in the current in the board.";
+    private static final String NO_TASKS_MESSAGE = "There are no tasks in the current in the .";
     private static final String MEMBER_HAS_REMOVED_COMMEND = "Member %s has removed comment from a task with the title %s.";
     private static final String MEMBER_HAS_ADDED_COMMEND = "Member %s has added comment to a task with the title %s.";
     private static final String MEMBER_NOT_AUTHOR_LOG = "Member %s has tried to remove a comment from task with title %s written by %s";
@@ -77,6 +77,8 @@ public class MemberImpl implements Member {
     private String name;
     private String username;
     private String password;
+
+    private String teamName;
     private final List<Task> tasks = new ArrayList<>();
 
     private final List<ActivityHistory> activityLog = new ArrayList<>();
@@ -178,6 +180,8 @@ public class MemberImpl implements Member {
         }
         return result.toString();
     }
+
+    @Override
     public String printHistory() {
         StringBuilder historyLogString = new StringBuilder();
 
@@ -206,6 +210,7 @@ public class MemberImpl implements Member {
         }
         logEvent(String.format(MEMBER_HAS_LOGGED_IN, getName()));
         isLoggedIn = true;
+        //TODO not sure if this will need in future
     }
 
     public void logOut(){
@@ -214,6 +219,7 @@ public class MemberImpl implements Member {
         }
         logEvent(String.format(MEMBER_HAS_LOGGED_OUT, getName()));
         this.isLoggedIn = false;
+        //TODO not sure if this will need in future
     }
     @Override
     public boolean isLoggedIn() {
@@ -223,11 +229,17 @@ public class MemberImpl implements Member {
     //TODO an idea to have only name printing in the toString and a full print method
     @Override
     public String toString(){
-        StringBuilder memberString = new StringBuilder();
-        memberString.append(String.format(MEMBER_PRINT_HEADER, getName()));
-        memberString.append(String.format(TASK_PRINTING_TEMPLATE, printTasks()));
-        memberString.append(String.format(HISTORY_PRINTING_TEMPLATE, printHistory()));
-         return memberString.toString();
+//        StringBuilder memberString = new StringBuilder();
+//        memberString.append(System.lineSeparator());
+//        memberString.append(String.format(MEMBER_PRINT_HEADER, getName()));
+//        memberString.append(System.lineSeparator());
+//        memberString.append(String.format(TASK_PRINTING_TEMPLATE, printTasks()));
+//        memberString.append(System.lineSeparator());
+//        memberString.append(String.format(HISTORY_PRINTING_TEMPLATE, printHistory()));
+//        memberString.append(System.lineSeparator());
+//         return memberString.toString();
+        return String.format("""
+                %n%s""", getName());
     }
 
     private void setPassword(String password) {
@@ -241,7 +253,7 @@ public class MemberImpl implements Member {
         this.name = name;
     }
 
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         Validation.validateStringRange(username, USERNAME_LEN_MIN, USERNAME_LEN_MAX, USERNAME_LEN_ERR);
         this.username = username;
     }

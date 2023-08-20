@@ -1,24 +1,19 @@
 package com.company.oop.taskmanagement.models.tasks;
 
-import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.contracts.Status;
 import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.StorySize;
-import com.company.oop.taskmanagement.models.enums.TaskStatus.BugStatus;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.StoryStatus;
 import com.company.oop.taskmanagement.models.enums.TaskType;
-import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
 import com.company.oop.taskmanagement.models.tasks.contracts.Story;
 
-public class StoryImpl extends AbstractPrioritable implements Story {
+public class StoryImpl extends AbstractPrioritizable implements Story {
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Story status is already at %s";
     private static final String STATUS_CHANGED_LOG = " Status has been changed from %s to %s.";
     private static final String STATUS_UNSUCCESSFUL_CHANGE_LOG = "Status change has been unsuccessful, current status is: %s.";
-    private Priority priority;
     private StorySize size;
-    private Member assignee;
 
     public StoryImpl(int id, String title, String description, Priority priority, StorySize size, Member assignee) {
         super(id, title, description, StoryStatus.NOT_DONE, TaskType.STORY, priority, assignee);
@@ -26,18 +21,8 @@ public class StoryImpl extends AbstractPrioritable implements Story {
     }
 
     @Override
-    public Priority getPriority() {
-        return priority;
-    }
-
-    @Override
     public StorySize getSize() {
         return size;
-    }
-
-    @Override
-    public Member getAssignee() {
-        return assignee;
     }
 
     @Override
@@ -79,14 +64,12 @@ public class StoryImpl extends AbstractPrioritable implements Story {
         return String.format("""
                 --Story--
                 %s
-                Priority: %s
                 Size: %s
-                Assignee: %s
                 Comments:
                 %s
                 History:
                 %s
-                """, super.toString(), getPriority(), getSize(), getAssignee(), getComments(), getHistoryChanges());
+                """, super.toString(), getSize(), getComments(), getHistoryChanges());
     }
 
 

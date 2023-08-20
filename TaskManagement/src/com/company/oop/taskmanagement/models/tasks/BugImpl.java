@@ -1,25 +1,22 @@
 package com.company.oop.taskmanagement.models.tasks;
 
-import com.company.oop.taskmanagement.models.contracts.Comment;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.contracts.Status;
 import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.Severity;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.BugStatus;
-import com.company.oop.taskmanagement.models.enums.TaskStatus.StoryStatus;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Bug;
-import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BugImpl extends AbstractPrioritable implements Bug {
+public class BugImpl extends AbstractPrioritizable implements Bug {
     //
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Bug status is already at %s";
 
-    private static final String STATUS_CHANGED_LOG =" Status has been changed from %s to %s." ;
+    private static final String STATUS_CHANGED_LOG = " Status has been changed from %s to %s.";
     private static final String STATUS_UNSUCCESSFUL_CHANGE_LOG = "Status change has been unsuccessful, current status is: %s.";
     private final List<String> steps;
     private Severity severity;
@@ -53,7 +50,7 @@ public class BugImpl extends AbstractPrioritable implements Bug {
 
     }
 
-    public void addStep(String step){
+    public void addStep(String step) {
         this.steps.add(step);
     }
     @Override
@@ -76,15 +73,13 @@ public class BugImpl extends AbstractPrioritable implements Bug {
                 --Bug--
                 %s
                 Steps to reproduce -> %s
-                Priority: %s
                 Severity: %s
-                Assignee: %s
                 Comments:
                 %s
                 History:
                 %s
                 -----------
-                """, super.toString(), getPriority(), getSeverity(), getAssignee(), getComments(), getHistoryChanges());
+                """, super.toString(), getSteps(), getSeverity(), getComments(), getHistoryChanges());
     }
 
     public void changeSeverity(Severity newSeverity){

@@ -8,13 +8,13 @@ import java.util.List;
 
 public class AddMemberToTeamCommand extends BaseCommand {
 
-    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 3;
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public final static String MEMBER_ADDED_SUCCESSFULLY = "Member %s was added successfully to team %s!";
     public final static String INVALID_USERNAME = "The username %s does not exist.";
     public final static String INVALID_TEAM = "Team with name %s does not exist.";
 
-    public AddMemberToTeamCommand(TaskManagementRepository taskManagementRepository) {
-        super(taskManagementRepository);
+    public AddMemberToTeamCommand(TaskManagementRepository taskRepository) {
+        super(taskRepository);
     }
 
     @Override
@@ -29,14 +29,16 @@ public class AddMemberToTeamCommand extends BaseCommand {
     }
 
     private String addMemberToTeam(String memberName, String teamName) {
-     getTaskRepository().addMemberToTeam(memberName, teamName);
+        getTaskRepository().addMemberToTeam(memberName, teamName);
 
-     return String.format(MEMBER_ADDED_SUCCESSFULLY, memberName, teamName);
+        return String.format(MEMBER_ADDED_SUCCESSFULLY, memberName, teamName);
     }
 
     private void validateArguments(String memberUsername, String teamName) {
-        if(!getTaskRepository().memberExists(memberUsername)) throw new ElementNotFoundException(String.format(INVALID_USERNAME, memberUsername));
-        if(!getTaskRepository().teamExists(teamName)) throw new ElementNotFoundException(String.format(INVALID_TEAM, teamName));
+        if (!getTaskRepository().memberExists(memberUsername))
+            throw new ElementNotFoundException(String.format(INVALID_USERNAME, memberUsername));
+        if (!getTaskRepository().teamExists(teamName))
+            throw new ElementNotFoundException(String.format(INVALID_TEAM, teamName));
     }
 
     @Override

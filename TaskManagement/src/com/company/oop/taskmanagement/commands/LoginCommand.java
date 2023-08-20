@@ -7,6 +7,11 @@ import com.company.oop.taskmanagement.utilities.Validation;
 import java.util.List;
 
 public class LoginCommand extends BaseCommand{
+
+    /**
+     * logs in the member if the input is valid
+     * input: Login username password
+     */
     private final static String MEMBER_LOGGED_IN = "Member %s successfully logged in!";
     private final static String WRONG_USERNAME_OR_PASSWORD = "Wrong username or password!";
     public final static String MEMBER_LOGGED_IN_ALREADY = "Member %s is logged in! Please log out first!";
@@ -28,7 +33,7 @@ public class LoginCommand extends BaseCommand{
     }
 
     private String login(String username, String password) {
-        Member memberFound = getTaskRepository().findMemberByName(username);
+        Member memberFound = getTaskRepository().findMemberByUserName(username);
 
         if (!memberFound.getPassword().equals(password)) {
             throw new IllegalArgumentException(WRONG_USERNAME_OR_PASSWORD);

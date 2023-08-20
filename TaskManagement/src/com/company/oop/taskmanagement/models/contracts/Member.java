@@ -21,4 +21,6 @@ public interface Member {
     List<ActivityHistory> getActivityHistory(); //TODO
     String toString();
 
+    String printHistory();
+
 }
