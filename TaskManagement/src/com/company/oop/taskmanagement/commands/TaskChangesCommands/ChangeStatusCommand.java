@@ -6,12 +6,10 @@ import com.company.oop.taskmanagement.models.contracts.Status;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.BugStatus;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.FeedbackStatus;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.StoryStatus;
-import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
 
-import java.text.ParseException;
 import java.util.List;
 
 public class ChangeStatusCommand extends BaseCommand {
@@ -43,7 +41,7 @@ public class ChangeStatusCommand extends BaseCommand {
         String statusString = parameters.get(1);
         Status classType;
         Status status;
-        switch (task.getTaskType()){
+        switch (task.getTaskType()) {
             case BUG -> status = ParsingHelpers.tryParseEnum(statusString, BugStatus.class);
             case STORY -> status = ParsingHelpers.tryParseEnum(statusString, StoryStatus.class);
             case FEEDBACK -> status = ParsingHelpers.tryParseEnum(statusString, FeedbackStatus.class);

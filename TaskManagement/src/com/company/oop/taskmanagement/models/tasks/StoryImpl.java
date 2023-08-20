@@ -80,9 +80,4 @@ public class StoryImpl extends AbstractPrioritizable implements Story {
     private void setSize(StorySize size) {
         this.size = size;
     }
-
-    private void setAssignee(Member assignee) {
-        //TODO POSSIBLE VALIDATION OF TEAM MEMBER
-        this.assignee = assignee;
-    }
 }

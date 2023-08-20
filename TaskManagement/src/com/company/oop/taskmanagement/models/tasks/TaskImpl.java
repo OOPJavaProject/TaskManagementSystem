@@ -12,7 +12,7 @@ import com.company.oop.taskmanagement.models.contracts.Status;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TaskImpl implements Task {
+public abstract class TaskImpl implements Task , Comparable<Task> {
 
     public static final int TITLE_MIN_LENGTH = 10;
     public static final int TITLE_MAX_LENGTH = 50;
@@ -162,4 +162,8 @@ public abstract class TaskImpl implements Task {
 //
 //    }
 
+    @Override
+    public int compareTo(Task o) {
+        return this.title.compareTo(o.getTitle());
+    }
 }

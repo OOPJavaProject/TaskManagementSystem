@@ -1,20 +1,16 @@
 package com.company.oop.taskmanagement.core;
 
 import com.company.oop.taskmanagement.commands.*;
-import com.company.oop.taskmanagement.commands.ChangePriorityCommand;
-import com.company.oop.taskmanagement.commands.ChangeRatingCommand;
-import com.company.oop.taskmanagement.commands.CreateCommands.CreateBugCommand;
-import com.company.oop.taskmanagement.commands.CreateCommands.CreateFeedbackCommand;
-import com.company.oop.taskmanagement.commands.CreateCommands.CreateStoryCommand;
-import com.company.oop.taskmanagement.commands.CreateCommands.CreateTeamCommand;
+
+import com.company.oop.taskmanagement.commands.CreateCommands.*;
+import com.company.oop.taskmanagement.commands.ShowCommands.ShowActivityComands.ShowBoardActivityCommand;
 import com.company.oop.taskmanagement.commands.ShowCommands.ShowActivityComands.ShowMemberActivityCommand;
 import com.company.oop.taskmanagement.commands.ShowCommands.ShowAllTeamMembersCommand;
 import com.company.oop.taskmanagement.commands.ShowCommands.ShowTeamBoardsCommand;
-import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeSeverityCommand;
-import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeStatusCommand;
-import com.company.oop.taskmanagement.commands.TaskChangesCommands.ChangeStorySizeCommand;
+import com.company.oop.taskmanagement.commands.TaskChangesCommands.*;
 import com.company.oop.taskmanagement.commands.contracts.Command;
 import com.company.oop.taskmanagement.commands.enums.CommandType;
+import com.company.oop.taskmanagement.commands.listing.*;
 import com.company.oop.taskmanagement.core.contracts.CommandFactory;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
@@ -73,6 +69,16 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new UnassignCommand(taskRepository);
             case ADDCOMMENT:
                 return new AddCommentCommand(taskRepository);
+            case LISTALLTASKS:
+                return new ListAllTasksCommand(taskRepository);
+            case LISTASSIGNEETASKS:
+                return new ListAssigneeTasksCommand(taskRepository);
+            case LISTBUGS:
+                return new ListBugsCommand(taskRepository);
+            case LISTFEEDBACKS:
+                return new ListFeedbacksCommand(taskRepository);
+            case LISTSTORIES:
+                return new ListStoriesCommand(taskRepository);
             default:
                 throw new IllegalArgumentException();
         }

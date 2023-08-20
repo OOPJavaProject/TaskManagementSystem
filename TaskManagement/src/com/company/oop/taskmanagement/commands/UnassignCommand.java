@@ -2,9 +2,7 @@ package com.company.oop.taskmanagement.commands;
 
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
-import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.PrioritizableTask;
-import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
 
@@ -15,7 +13,7 @@ public class UnassignCommand extends BaseCommand {
     /**
      * input: Unassign TaskId, MemberName
      * This command removes a task from the member's task list.
-     * */
+     */
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public static final String TASK_UNASSIGNED = "Task with ID %d was unassigned from member %s!";

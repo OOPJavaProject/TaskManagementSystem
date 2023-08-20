@@ -1,6 +1,5 @@
 package com.company.oop.taskamanagement.commands;
 
-import com.company.oop.taskmanagement.commands.CreateBoardCommand;
 import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import org.junit.jupiter.api.BeforeEach;

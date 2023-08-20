@@ -3,6 +3,7 @@ package com.company.oop.taskmanagement.models.tasks;
 import com.company.oop.taskmanagement.models.enums.TaskStatus.FeedbackStatus;
 import com.company.oop.taskmanagement.models.enums.TaskType;
 import com.company.oop.taskmanagement.models.tasks.contracts.Feedback;
+import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 
 public class FeedbackImpl extends TaskImpl implements Feedback {
 
@@ -72,4 +73,5 @@ public class FeedbackImpl extends TaskImpl implements Feedback {
     private void setRating(int rating) {
         this.rating = rating;
     }
+
 }

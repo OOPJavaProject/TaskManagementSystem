@@ -6,7 +6,7 @@ import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
 
-public class LoginCommand extends BaseCommand{
+public class LoginCommand extends BaseCommand {
 
     /**
      * logs in the member if the input is valid

@@ -17,7 +17,7 @@ public class ShowTeamsCommand extends BaseCommand {
 
     @Override
     protected String executeCommand(List<String> parameters) {
-        Validation.validateArgumentsCount(parameters,NUMBER_OF_ARGUMENTS_EXPECTED);
+        Validation.validateArgumentsCount(parameters, NUMBER_OF_ARGUMENTS_EXPECTED);
         return showTeams();
     }
 
@@ -26,12 +26,12 @@ public class ShowTeamsCommand extends BaseCommand {
             throw new ElementNotFoundException(NO_TEAMS_ERR);
         }
         return String.format("""
-               ---------------------%s
-               ---------------------
-               """, getTaskRepository().getTeams().toString()
+                ---------------------%s
+                ---------------------
+                """, getTaskRepository().getTeams().toString()
                 .replace("[", "")
                 .replace("]", "")
-                .replace(",","")
+                .replace(",", "")
                 .replace(" ", ""));
     }
 

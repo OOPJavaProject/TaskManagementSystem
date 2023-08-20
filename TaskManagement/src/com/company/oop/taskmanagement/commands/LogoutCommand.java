@@ -4,7 +4,7 @@ import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.List;
 
-public class LogoutCommand extends BaseCommand{
+public class LogoutCommand extends BaseCommand {
 
     /**
      * Logs out the current logged member

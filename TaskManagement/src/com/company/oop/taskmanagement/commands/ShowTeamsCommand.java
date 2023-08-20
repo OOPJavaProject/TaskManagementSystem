@@ -8,31 +8,31 @@ import java.util.List;
 
 public class ShowTeamsCommand extends BaseCommand {
 
-   public static final int NUMBER_OF_ARGUMENTS_EXPECTED = 0;
+    public static final int NUMBER_OF_ARGUMENTS_EXPECTED = 0;
     public static final String NO_TEAMS_ERR = "There are no existing teams to show.";
 
     public ShowTeamsCommand(TaskManagementRepository taskManagementRepository) {
-       super(taskManagementRepository);
-   }
+        super(taskManagementRepository);
+    }
 
     @Override
     protected String executeCommand(List<String> parameters) {
-        Validation.validateArgumentsCount(parameters,NUMBER_OF_ARGUMENTS_EXPECTED);
+        Validation.validateArgumentsCount(parameters, NUMBER_OF_ARGUMENTS_EXPECTED);
         return showTeams();
     }
 
     private String showTeams() {
-       if (getTaskRepository().getTeams().size() == 0) {
-           throw new ElementNotFoundException(NO_TEAMS_ERR);
-       }
-       return String.format("""
-               ---------------------%s
-               ---------------------
-               """, getTaskRepository().getTeams().toString()
-               .replace("[", "")
-               .replace("]", "")
-               .replace(",","")
-               .replace(" ", ""));
+        if (getTaskRepository().getTeams().size() == 0) {
+            throw new ElementNotFoundException(NO_TEAMS_ERR);
+        }
+        return String.format("""
+                ---------------------%s
+                ---------------------
+                """, getTaskRepository().getTeams().toString()
+                .replace("[", "")
+                .replace("]", "")
+                .replace(",", "")
+                .replace(" ", ""));
     }
 
     @Override

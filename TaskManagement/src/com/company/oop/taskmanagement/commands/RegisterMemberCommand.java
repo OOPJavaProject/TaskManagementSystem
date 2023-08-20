@@ -6,7 +6,7 @@ import com.company.oop.taskmanagement.utilities.Validation;
 
 import java.util.List;
 
-public class RegisterMemberCommand extends BaseCommand{
+public class RegisterMemberCommand extends BaseCommand {
 
     /**
      * registers a non-existing member
