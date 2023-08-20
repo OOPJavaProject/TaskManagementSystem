@@ -5,6 +5,8 @@ import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.Severity;
 import com.company.oop.taskmanagement.models.tasks.BugImpl;
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.engine.TestExecutionResult;
 
@@ -14,7 +16,7 @@ public class BugImplTests {
 
     @Test
     public void constructor_Should_InitializeComments_When_ArgumentsValid() {
-
+        Assertions.assertEquals();
     }
 
     @Test

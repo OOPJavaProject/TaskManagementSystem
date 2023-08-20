@@ -4,11 +4,12 @@ import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.contracts.Status;
 import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.TaskType;
-import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
+import com.company.oop.taskmanagement.models.tasks.contracts.PrioritizableTask;
 
-public abstract class AbstractPrioritizable extends TaskImpl implements PrioritableTask {
+public abstract class AbstractPrioritizable extends TaskImpl implements PrioritizableTask {
     private Priority priority;
     private Member assignee;
+
 
     public AbstractPrioritizable(int id, String title, String description, Status status, TaskType tasktype, Priority priority, Member assignee) {
         super(id, title, description, status, tasktype);

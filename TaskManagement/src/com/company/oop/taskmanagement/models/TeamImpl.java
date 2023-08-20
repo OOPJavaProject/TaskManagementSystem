@@ -69,20 +69,19 @@ public class TeamImpl implements Team {
         this.members.remove(memberToRemove);
         logEvent(String.format(MEMBER_REMOVED_LOG, memberToRemove.getName()));
     }
+
     @Override
-    public void addBoard(Board board) {
-        if (boards.contains(board)) {
-            throw new IllegalArgumentException(String.format(BOARD_EXISTS_MESSAGE, board.getName()));
-        }
+    public Board createBoard(String name) {
+        Board board = new BoardImpl(name);
         this.boards.add(board);
         logEvent(String.format(BOARD_ADDED_LOG, board.getName()));
+        return board;
     }
 
     @Override
     public void removeBoard(Board board) {
         this.boards.remove(board);
         logEvent(String.format(BOARD_REMOVED_LOG, board.getName()));
-
     }
 
     public String printMember() {
@@ -122,8 +121,8 @@ public class TeamImpl implements Team {
 
     @Override
     public String toString(){
-        //TODO
-        return getName();
+        return String.format("""
+                %n%s""", getName());
     }
     private void logEvent(String event) {
         this.history.add(new EventLog(event));

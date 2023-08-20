@@ -9,7 +9,9 @@ public interface Team {
     List<Member> getMembers();
 
     List<Board> getBoards();
-    void addBoard(Board board);
+
+    Board createBoard(String name);
+
     void removeBoard(Board board);
     String printMember();
     String printBoard();

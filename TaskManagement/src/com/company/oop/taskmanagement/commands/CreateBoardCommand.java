@@ -17,7 +17,6 @@ public class CreateBoardCommand extends BaseCommand{
 
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     public static final String BOARD_CREATED = "Board with name %s in team %s was created!";
-    public static final String NO_TEAM_MSG = "Team with name %s does not exist";
     public static final String EXISTING_BOARD_IN_TEAM = "There is an existing board with name %s in this team!";
 
     public CreateBoardCommand(TaskManagementRepository taskManagementRepository) {
@@ -41,8 +40,7 @@ public class CreateBoardCommand extends BaseCommand{
                 throw new IllegalArgumentException(String.format(EXISTING_BOARD_IN_TEAM, boardName));
             }
         }
-            Board newBoard = getTaskRepository().createBoard(boardName);
-            team.addBoard(newBoard);
+            Board newBoard = team.createBoard(boardName);
             return String.format(BOARD_CREATED, newBoard.getName(), teamName);
     }
 }

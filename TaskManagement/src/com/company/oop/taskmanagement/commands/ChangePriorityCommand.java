@@ -2,7 +2,7 @@ package com.company.oop.taskmanagement.commands;
 
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.enums.Priority;
-import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
+import com.company.oop.taskmanagement.models.tasks.contracts.PrioritizableTask;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
 
@@ -21,20 +21,12 @@ public class ChangePriorityCommand extends BaseCommand {
         super(taskRepository);
     }
 
-
     @Override
     public String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters, 2);
-        PrioritableTask task;
-        try {
-            task = (PrioritableTask) getTaskRepository().findTaskById(ParsingHelpers.tryParseInt(parameters.get(0), INVALID_ID_INPUT));
-        } catch (ClassCastException e) {
-            throw new IllegalArgumentException(INVALID_TASK_TYPE);
-        }
+        PrioritizableTask task = getTaskRepository().findPrioritizableTaskById(ParsingHelpers.tryParseInt(parameters.get(0), INVALID_ID_INPUT));
         Priority priority = ParsingHelpers.tryParseEnum(parameters.get(1), Priority.class);
-
         task.changePriority(priority);
-
         return PRIORITY_CHANGED;
     }
 

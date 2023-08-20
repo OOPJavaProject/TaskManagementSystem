@@ -19,14 +19,14 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new LoginCommand(taskRepository);
             case LOGOUT:
                 return new LogoutCommand(taskRepository);
-//                case SHOWMEMBERS:
-//                    return new ShowMembersCommand(taskRepository);
+                case SHOWMEMBERS:
+                    return new ShowMembersCommand(taskRepository);
                 case SHOWMEMBERACTIVITY:
                     return new ShowMemberActivityCommand(taskRepository);
             case CREATETEAM:
                 return new CreateTeamCommand(taskRepository);
-//                case SHOWTEAMS:
-//                    return new ShowTeamsCommand(taskRepository);
+                case SHOWTEAMS:
+                    return new ShowTeamsCommand(taskRepository);
 //                case SHOWTEAMACTIVITY:
 //                    return new ShowTeamActivityCommand(taskRepository);
                 case ADDMEMBERTOTEAM:
@@ -57,8 +57,8 @@ public class CommandFactoryImpl implements CommandFactory {
 //                    return new ChangeRatingCommand(taskRepository);
                 case ASSIGN:
                     return new AssignCommand(taskRepository);
-//                case UNASSIGN:
-//                    return new UnassignCommand(taskRepository);
+                case UNASSIGN:
+                    return new UnassignCommand(taskRepository);
             case ADDCOMMENT:
                 return new AddCommentCommand(taskRepository);
             default:

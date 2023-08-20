@@ -2,7 +2,8 @@ package com.company.oop.taskmanagement.commands;
 
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.contracts.Member;
-import com.company.oop.taskmanagement.models.tasks.contracts.PrioritableTask;
+import com.company.oop.taskmanagement.models.enums.TaskType;
+import com.company.oop.taskmanagement.models.tasks.contracts.PrioritizableTask;
 import com.company.oop.taskmanagement.models.tasks.contracts.Task;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;
@@ -20,7 +21,6 @@ public class AssignCommand extends BaseCommand {
     public static final String INVALID_TASK_ID = "Invalid task id.";
     public static final String TASK_ASSIGNED_TO_MEMBER = "Member %s was assigned a task.";
 
-
     public AssignCommand(TaskManagementRepository taskRepository) {
         super(taskRepository);
     }
@@ -29,23 +29,14 @@ public class AssignCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         Member member = getTaskRepository().findMemberByUserName(parameters.get(0));
-        Task task = getTaskRepository().findTaskById(ParsingHelpers.tryParseInt(parameters.get(1), INVALID_TASK_ID));
-
-
+        PrioritizableTask task = getTaskRepository().findPrioritizableTaskById(ParsingHelpers.tryParseInt(parameters.get(1), INVALID_TASK_ID));
         return assignTaskToMember(member, task);
     }
 
-    private String assignTaskToMember(Member member, Task task) {
-        member.addTask(task);
-        try {
-            ((PrioritableTask) task).changeAssignee(member);
-        } catch (ClassCastException e) {
-            System.out.println("\n");
-        }
-
+    private String assignTaskToMember(Member member, PrioritizableTask task) {
+        getTaskRepository().assignTaskToMember(member, task);
         return String.format(TASK_ASSIGNED_TO_MEMBER, member.getName());
     }
-
 
     @Override
     protected boolean requiresLogin() {
