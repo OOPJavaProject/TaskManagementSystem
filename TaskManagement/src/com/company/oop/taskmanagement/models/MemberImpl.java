@@ -77,12 +77,9 @@ public class MemberImpl implements Member {
     private String name;
     private String username;
     private String password;
-
     private String teamName;
     private final List<Task> tasks = new ArrayList<>();
-
     private final List<ActivityHistory> activityLog = new ArrayList<>();
-
     private boolean isLoggedIn;
 
     public MemberImpl(String name, String username, String password) {

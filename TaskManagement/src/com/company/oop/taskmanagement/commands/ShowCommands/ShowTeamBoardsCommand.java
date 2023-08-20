@@ -18,7 +18,7 @@ public class ShowTeamBoardsCommand extends BaseCommand {
 
     private static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
 
-    protected ShowTeamBoardsCommand(TaskManagementRepository taskManagementRepository) {
+    public ShowTeamBoardsCommand(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
     }
 

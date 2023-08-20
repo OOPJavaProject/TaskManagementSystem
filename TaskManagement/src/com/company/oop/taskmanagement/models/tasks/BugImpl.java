@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BugImpl extends AbstractPrioritizable implements Bug {
-    //
 
     public static final String STATUS_CHANGE_ERROR_MESSAGE = "Bug status is already at %s";
-
     private static final String STATUS_CHANGED_LOG = " Status has been changed from %s to %s.";
     private static final String STATUS_UNSUCCESSFUL_CHANGE_LOG = "Status change has been unsuccessful, current status is: %s.";
+    public static final String STEP_ADDED_LOG = "Step added";
     private final List<String> steps;
     private Severity severity;
 
@@ -52,6 +51,7 @@ public class BugImpl extends AbstractPrioritizable implements Bug {
 
     public void addStep(String step) {
         this.steps.add(step);
+        logEvent(STEP_ADDED_LOG);
     }
     @Override
     public void revertStatus() {

@@ -60,8 +60,5 @@ public interface TaskManagementRepository {
     void logout();
 
     Comment createComment(String content, Member author);
-
-
-
     Member getLoggedInMember();
 }
