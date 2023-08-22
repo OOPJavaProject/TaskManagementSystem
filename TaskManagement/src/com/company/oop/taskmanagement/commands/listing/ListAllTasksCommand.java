@@ -14,7 +14,6 @@ public class ListAllTasksCommand extends BaseCommand {
     public static final String ERR_MESSAGE_WHEN_TASKSIZE_ZERO = "There are no tasks to display";
     public static final String INVALID_INPUT_ERR = "Invalid input. You are only able to sort or filter tasks.";
 
-    Scanner scanner = new Scanner(System.in);
 
     public ListAllTasksCommand(TaskManagementRepository taskManagementRepository) {
         super(taskManagementRepository);
@@ -24,7 +23,11 @@ public class ListAllTasksCommand extends BaseCommand {
     protected String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters, NUMBER_OF_EXPECTED_ARGUMENTS);
         String commandType = parameters.get(0);
+        if (getTaskRepository().getTasks().size() == 0) {
+            throw new IllegalArgumentException(ERR_MESSAGE_WHEN_TASKSIZE_ZERO);
+        }
         if (commandType.equalsIgnoreCase("filter")) {
+            Scanner scanner = new Scanner(System.in);
             return FilteringHelper.filterTasksByTitle(getTaskRepository().getTasks(), scanner.nextLine());
         } else if (commandType.equalsIgnoreCase("sort")) {
             return FilteringHelper.sortByTitle(getTaskRepository().getTasks());

@@ -29,7 +29,7 @@ public class CreateBoardCommand extends BaseCommand {
     }
 
     @Override
-    protected String executeCommand(List<String> parameters) {
+    public String executeCommand(List<String> parameters) {
         Validation.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String boardName = parameters.get(0);
         String teamName = parameters.get(1);

@@ -19,6 +19,11 @@ public interface TaskManagementRepository {
 
     List<Member> getMembers();
     List<Board> getBoards();
+
+    List<Comment> getComments();
+
+    List<PrioritizableTask> getPrioritizableTasks();
+
     boolean teamExists(String teamName);
 
     boolean boardExists(String boardName);

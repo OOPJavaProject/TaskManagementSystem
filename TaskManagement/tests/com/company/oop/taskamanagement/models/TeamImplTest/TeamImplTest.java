@@ -1,12 +1,17 @@
 package com.company.oop.taskamanagement.models.TeamImplTest;
 
 import com.company.oop.taskamanagement.models.member.MemberImplTest;
+import com.company.oop.taskmanagement.commands.CreateCommands.CreateTeamCommand;
+import com.company.oop.taskmanagement.core.TaskManagementRepositoryImpl;
+import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 import com.company.oop.taskmanagement.models.MemberImpl;
 import com.company.oop.taskmanagement.models.TeamImpl;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.contracts.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 public class TeamImplTest {
     public static final String VALID_TEAM_NAME = "ValidName";
@@ -50,5 +55,11 @@ public class TeamImplTest {
         return new TeamImpl(
           VALID_TEAM_NAME
         );
+    }
+
+    public static void createTeam() {
+        TaskManagementRepository taskManagementRepository = new TaskManagementRepositoryImpl();
+        CreateTeamCommand command = new CreateTeamCommand(taskManagementRepository);
+        command.execute(List.of(VALID_TEAM_NAME));
     }
 }

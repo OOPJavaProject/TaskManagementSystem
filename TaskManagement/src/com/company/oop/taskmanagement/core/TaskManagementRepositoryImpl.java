@@ -67,6 +67,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         return new ArrayList<>(members);
     }
 
+    @Override
     public List<Comment> getComments() {
         return new ArrayList<>(comments);
     }
@@ -77,36 +78,29 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
     }
 
     @Override
+    public List<PrioritizableTask> getPrioritizableTasks() {
+        return new ArrayList<>(prioritizableTasks);
+    }
+
+    @Override
     public boolean teamExists(String teamName) {
-        for (Team team : teams) {
-            if (team.getName().equals(teamName)) {
-                return true;
-            }
-        }
-        return false;
+        return teams.stream()
+                .anyMatch(team -> team.getName().equals(teamName));
     }
 
 
     @Override
     public boolean boardExists(String boardName) {
-        for (Team team : teams) {
-            for (Board board : team.getBoards()) {
-                if (board.getName().equals(boardName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
+        return teams.stream()
+                .anyMatch(team -> team.getBoards()
+                        .stream()
+                        .anyMatch(board -> board.getName().equals(boardName)));
     }
 
     @Override
     public boolean memberExists(String memberUsername) {
-        for (Member member : members) {
-            if (member.getUsername().equals(memberUsername)) {
-                return true;
-            }
-        }
-        return false;
+        return members.stream()
+                .anyMatch(member -> member.getUsername().equals(memberUsername));
     }
 
     @Override
@@ -127,64 +121,51 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     @Override
     public Team findTeamByName(String teamName) {
-        for (Team team : teams) {
-            if (team.getName().equals(teamName)) {
-                return team;
-            }
-        }
-        throw new ElementNotFoundException(String.format(TEAM_NOT_EXIST_MESSAGE, teamName));
+        return teams.stream()
+                .filter(team -> team.getName().equals(teamName))
+                .findFirst()
+                .orElseThrow(() -> new ElementNotFoundException(String.format(TEAM_NOT_EXIST_MESSAGE, teamName)));
     }
 
     @Override
     public Board findBoardByName(String boardName) {
-        for (Team team : teams) {
-            for (Board board : team.getBoards()) {
-                if (board.getName().equals(boardName))  {
-                    return board;
-                }
-            }
-        }
-        throw new ElementNotFoundException(String.format(BOARD_NOT_EXIST_MESSAGE, boardName));
+        return teams.stream()
+                .flatMap(team -> team.getBoards().stream())
+                .filter(board -> board.getName().equals(boardName))
+                .findFirst()
+                .orElseThrow(() -> new ElementNotFoundException(String.format(BOARD_NOT_EXIST_MESSAGE, boardName)));
     }
 
     @Override
     public Member findMemberByName(String memberName) {
-        for (Member member : members) {
-            if (member.getName().equals(memberName)) {
-                return member;
-            }
-        }
-        throw new ElementNotFoundException(String.format(MEMBER_NOT_EXIST_MESSAGE, memberName));
+        return members.stream()
+                .filter(member -> member.getName().equals(memberName))
+                .findFirst()
+                .orElseThrow(() -> new ElementNotFoundException(String.format(MEMBER_NOT_EXIST_MESSAGE, memberName)));
     }
 
     @Override
     public Member findMemberByUserName(String username) {
-        for (Member member : members) {
-            if (member.getUsername().equals(username)) {
-                return member;
-            }
-        }
-        throw new ElementNotFoundException(String.format(MEMBER_USERNAME_NOT_EXIST_MESSAGE, username));
+        return members.stream()
+                .filter(member -> member.getUsername().equals(username))
+                .findFirst()
+                .orElseThrow(() -> new ElementNotFoundException(String.format(MEMBER_USERNAME_NOT_EXIST_MESSAGE, username)));
     }
 
     @Override
     public Task findTaskById(int id) {
-        for (Task task : tasks) {
-            if (task.getId() == id) {
-                return task;
-            }
-        }
-        throw new ElementNotFoundException(String.format(TASK_NOT_EXIST_MESSAGE, id));
+        return tasks.stream()
+                .filter(task -> task.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new ElementNotFoundException(String.format(TASK_NOT_EXIST_MESSAGE, id)));
     }
 
     @Override
     public PrioritizableTask findPrioritizableTaskById(int id) {
-        for (PrioritizableTask task : prioritizableTasks) {
-            if (task.getId() == id) {
-                return task;
-            }
-        }
-        throw new ElementNotFoundException(String.format(TASK_NOT_EXIST_MESSAGE, id));
+        return prioritizableTasks.stream()
+                .filter(task -> task.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new ElementNotFoundException(String.format(TASK_NOT_EXIST_MESSAGE, id)));
     }
 
     @Override

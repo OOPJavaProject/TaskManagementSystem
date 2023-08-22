@@ -4,6 +4,7 @@ import com.company.oop.taskmanagement.commands.contracts.Command;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
 
 import java.util.List;
+import java.util.Scanner;
 
 public abstract class BaseCommand implements Command {
 
