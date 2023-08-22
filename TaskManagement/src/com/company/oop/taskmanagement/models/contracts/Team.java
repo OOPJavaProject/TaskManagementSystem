@@ -15,7 +15,9 @@ public interface Team {
     void removeBoard(Board board);
     String printMembers();
     String printBoards();
+    void addBoard(Board board);
     void removeMember(Member memberToRemove);
+    String printHistory();
     String toString();
 
     void addMember(Member memberToAdd);

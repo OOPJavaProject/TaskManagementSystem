@@ -80,4 +80,5 @@ public class StoryImpl extends AbstractPrioritizable implements Story {
     private void setSize(StorySize size) {
         this.size = size;
     }
+
 }

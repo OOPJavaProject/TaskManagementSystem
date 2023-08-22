@@ -69,6 +69,11 @@ public class BoardImpl implements Board {
     }
 
     @Override
+    public void insertTasks(List<Task> tasksList) {
+        setTasks(tasksList);
+    }
+
+    @Override
     public void addTask(Task task) {
         this.tasks.add(task);
         logEvent(String.format(TASK_HAS_BEEN_ADDED, task.getTitle()));

@@ -41,6 +41,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     private final List<Task> tasks = new ArrayList<>();
 
+    private final List<Board> boards = new ArrayList<>();
     private final List<Comment> comments = new ArrayList<>();
 
     private final List<PrioritizableTask> prioritizableTasks = new ArrayList<>();
@@ -68,6 +69,11 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
 
     public List<Comment> getComments() {
         return new ArrayList<>(comments);
+    }
+
+    @Override
+    public List<Board> getBoards() {
+        return new ArrayList<>(boards);
     }
 
     @Override
@@ -228,6 +234,14 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
     }
 
+
+    @Override
+    public Board createBoard(String name) {
+        Board board = new BoardImpl(name);
+        this.boards.add(board);
+        return board;
+    }
+
     @Override
     public Comment createComment(String content, Member author) {
         Comment comment = new CommentImpl(content, author);
@@ -254,6 +268,7 @@ public class TaskManagementRepositoryImpl implements TaskManagementRepository {
         }
         return loggedMember;
     }
+
 
     @Override
     public boolean hasLoggedInMember() {

@@ -18,7 +18,7 @@ public interface TaskManagementRepository {
     List<Team> getTeams();
 
     List<Member> getMembers();
-
+    List<Board> getBoards();
     boolean teamExists(String teamName);
 
     boolean boardExists(String boardName);
@@ -58,7 +58,7 @@ public interface TaskManagementRepository {
     void login(Member member);
 
     void logout();
-
+    Board createBoard(String name);
     Comment createComment(String content, Member author);
     Member getLoggedInMember();
 }

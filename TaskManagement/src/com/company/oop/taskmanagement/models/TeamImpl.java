@@ -1,5 +1,6 @@
 package com.company.oop.taskmanagement.models;
 
+import com.company.oop.taskmanagement.models.contracts.ActivityHistory;
 import com.company.oop.taskmanagement.models.contracts.Board;
 import com.company.oop.taskmanagement.models.contracts.Member;
 import com.company.oop.taskmanagement.models.contracts.Team;
@@ -30,6 +31,7 @@ public class TeamImpl implements Team {
     private static final String MEMBER_ADDED_LOG = "Member with name %s has been added.";
     private static final String MEMBER_REMOVED_LOG = "Member with name %s has been removed.";
     public static final String BOARD_EXISTS_MESSAGE = "Board with name %s already exists in this team.";
+    private static final String TEAM_HAS_NO_HISTORY = "Team has no history";
 
     private String teamName;
     private final List<Member> members = new ArrayList<>();
@@ -69,9 +71,13 @@ public class TeamImpl implements Team {
     public void removeMember(Member memberToRemove) {
         this.members.remove(memberToRemove);
         logEvent(String.format(MEMBER_REMOVED_LOG, memberToRemove.getName()));
-        memberToRemove.logAddedToTeam(this);
+        memberToRemove.logRemovedFromTeam(this);
     }
 
+    @Override
+    public void addBoard(Board board){
+        this.boards.add(board);
+    }
     @Override
     public Board createBoard(String name) {
         Board board = new BoardImpl(name);
@@ -125,6 +131,21 @@ public class TeamImpl implements Team {
     public String toString(){
         return String.format("""
                 %n%s""", getName());
+    }
+    public List<ActivityHistory> getHistory(){
+        return new ArrayList<>(this.history);
+    }
+
+    @Override
+    public String printHistory(){
+        StringBuilder result = new StringBuilder();
+        for (ActivityHistory log: this.getHistory() ) {
+            result.append(log.toString());
+        }
+        if (result.isEmpty()){
+            return TEAM_HAS_NO_HISTORY;
+        }
+        return result.toString();
     }
     private void logEvent(String event) {
         this.history.add(new EventLog(event));

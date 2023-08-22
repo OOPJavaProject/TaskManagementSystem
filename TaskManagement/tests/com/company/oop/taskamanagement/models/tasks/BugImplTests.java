@@ -16,7 +16,6 @@ public class BugImplTests {
 
     @Test
     public void constructor_Should_InitializeComments_When_ArgumentsValid() {
-        Assertions.assertEquals();
     }
 
     @Test
@@ -39,10 +38,12 @@ public class BugImplTests {
     public void constructor_Should_InitializeSeverity_WhenArgumentsAreValid() {
 
     }
+
     @Test
     public void constructor_Should_InitializeId_When_ArgumentsValid() {
 
     }
+
     @Test
     public void constructor_Should_InitializeTitle_When_ArgumentsValid() {
 
@@ -97,6 +98,7 @@ public class BugImplTests {
     public void getSteps_Should_ReturnNewCollection_When_Invoked() {
 
     }
+
     @Test
     public void getComments_Should_ReturnNewCollection_When_Invoked() {
 

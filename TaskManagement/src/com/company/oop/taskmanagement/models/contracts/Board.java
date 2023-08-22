@@ -14,6 +14,8 @@ public interface Board {
 
     String toString();
 
+    void insertTasks(List<Task> tasksList);
+
     void addTask(Task task);
 
     void removeTask(Task task);

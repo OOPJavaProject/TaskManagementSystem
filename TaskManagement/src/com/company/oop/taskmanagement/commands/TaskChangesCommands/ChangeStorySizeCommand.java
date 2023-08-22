@@ -2,7 +2,9 @@ package com.company.oop.taskmanagement.commands.TaskChangesCommands;
 
 import com.company.oop.taskmanagement.commands.BaseCommand;
 import com.company.oop.taskmanagement.core.contracts.TaskManagementRepository;
+import com.company.oop.taskmanagement.models.enums.Priority;
 import com.company.oop.taskmanagement.models.enums.StorySize;
+import com.company.oop.taskmanagement.models.tasks.contracts.PrioritizableTask;
 import com.company.oop.taskmanagement.models.tasks.contracts.Story;
 import com.company.oop.taskmanagement.utilities.ParsingHelpers;
 import com.company.oop.taskmanagement.utilities.Validation;

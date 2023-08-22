@@ -13,15 +13,15 @@ public class EventLog implements ActivityHistory {
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy HH:mm:ss");
 
     public EventLog(String description) {
-        setDescribtion(description);
+        setDescription(description);
         timestamp = LocalDateTime.now();
     }
 
-    private void setDescribtion(String description) {
+    private void setDescription(String description) {
         this.description = description;
     }
 
-    protected String getDescription() {
+    public String getDescription() {
         return description;
     }
 
