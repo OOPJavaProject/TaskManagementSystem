@@ -20,7 +20,6 @@ of all the tasks, surrounding a software product they are building.
 - [Operations](#operations)
 - [Use Cases](#use-cases)
 - [Technical Requirements](#technical-requirements)
-- [Teamwork Guidelines](#teamwork-guidelines)
 
 ## Functional Requirements
 
